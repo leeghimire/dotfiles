@@ -1,11 +1,14 @@
-local dpi = xresources.apply_dpi local gfs = require("gears.filesystem")
-local file = io.open(path, "r")
-local io = require "io"
-local path = os.getenv("HOME") .. "/.cache/wal/colors"
-local table = require "table"
-local theme_assets = require("beautiful.theme_assets")
-local themes_path = gfs.get_themes_dir()
 local xresources = require("beautiful.xresources")
+local theme_assets = require("beautiful.theme_assets")
+local gfs = require("gears.filesystem")
+local table = require "table"
+local io = require "io"
+
+local dpi = xresources.apply_dpi
+local themes_path = gfs.get_themes_dir()
+
+local path = os.getenv("HOME") .. "/.cache/wal/colors"
+local file = io.open(path, "r")
 
 local colors = {}
 
@@ -21,13 +24,16 @@ end
 
 local theme = {}
 
-theme.font          = "JetBrainsMono 11"
+theme.font          = "JetBrainsMono 10"
 
 theme.bg_normal     = colors[1]
 theme.bg_focus      = colors[2]
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = colors[1]
+
+theme.tasklist_bg_normal = colors[1]
+theme.tasklist_bg_focus = colors[1]
 
 theme.titlebar_bg_focus = colors[1]
 
