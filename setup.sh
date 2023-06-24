@@ -7,3 +7,5 @@ cp ./bash_profile ${HOME}/.bash_profile
 cp ./colors.json ${HOME}/.config/
 cp ./bashrc ${HOME}/.bashrc
 cp ./xsession ${HOME}/.xsession
+
+wal -f ${HOME}/.config/colors.json

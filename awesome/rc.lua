@@ -109,7 +109,7 @@ local tasklist_buttons = gears.table.join(
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"i", "ii", "iii", "vi", "v"}, s, awful.layout.layouts[1])
+    awful.tag({"i", "ii", "iii", "iv", "v"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -205,7 +205,7 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "F2", function () awful.spawn("firefox") end,
+    awful.key({ modkey,           }, "w", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
     awful.key({ modkey,           }, "d", function () awful.spawn("dmenu_run") end,
               {description = "open dmenu", group = "launcher"}),

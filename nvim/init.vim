@@ -42,23 +42,27 @@ function! RunFile(command) abort
     autocmd BufEnter <buffer> startinsert
 endfunction
 
-autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>
-autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s && time ./a.out', expand('%')))<CR>
-autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++17 %s && time ./a.out', expand('%')))<CR>
-autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s && time ./a.out', expand('%')))<CR>
-autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
+autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s & time ./a.out', expand('%')))<CR>
+autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std+c++17 %s & time ./a.out', expand('%')))<CR><CR>
+autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s & time ./a.out', expand('%')))<CR>
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
+autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>
+autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out & time ./a.out', expand('%')))<CR>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '\<C-g>u\<TAB>'
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope grep_string<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>gd <Plug>(coc-definition)
 nnoremap <leader>kj :%y+<CR>
 
+nnoremap <leader>nn <cmd> CocCommand document.jumpToNextSymbol<CR>
+nnoremap <leader>nb <cmd> CocCommand document.jumpToPrevSymbol<CR>
+nnoremap <leader>r  <cmd> CocCommand document.renameCurrentWord<CR>
+nnoremap <leader>gd <Plug>(coc-definition)
+
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope grep_string<cr>
+
 let g:clipboard = {
-  \   'name': 'xclip-xfce4-clipman',
+  \   'name': 'xclip',
   \   'copy': {
   \      '+': 'xclip -selection clipboard',
   \      '*': 'xclip -selection clipboard',

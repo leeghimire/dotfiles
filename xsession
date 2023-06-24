@@ -1,3 +1,3 @@
-wal -f ~/.config/colors.json
+wal -Rn
 sh ~/.screenlayout/layout.sh
 nitrogen --restore
