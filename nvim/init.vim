@@ -1,20 +1,20 @@
-set nu rnu
-set nowrap
-set smartcase
-set ignorecase
-set smartindent
 set autoread
 set hidden
+set ignorecase
+set nowrap
+set nu rnu
+set smartcase
+set smartindent
 
 set colorcolumn=80
 set shiftwidth=4
 set scrolloff=8
 
-inoremap { {}<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap [ []<Esc>ha
 inoremap " ""<Esc>ha
 inoremap ' ''<Esc>ha
+inoremap ( ()<Esc>ha
+inoremap [ []<Esc>ha
+inoremap { {}<Esc>ha
 
 call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/plenary.nvim'
@@ -42,18 +42,18 @@ function! RunFile(command) abort
     autocmd BufEnter <buffer> startinsert
 endfunction
 
-autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s & time ./a.out', expand('%')))<CR>
-autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std+c++17 %s & time ./a.out', expand('%')))<CR><CR>
-autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s & time ./a.out', expand('%')))<CR>
+autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s -o a.out && time ./a.out', expand('%')))<CR>
+autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++17 %s && time ./a.out', expand('%')))<CR><CR>
+autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s && time ./a.out', expand('%')))<CR>
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
 autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>
-autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out & time ./a.out', expand('%')))<CR>
+autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '\<C-g>u\<TAB>'
 nnoremap <leader>kj :%y+<CR>
 
-nnoremap <leader>nn <cmd> CocCommand document.jumpToNextSymbol<CR>
 nnoremap <leader>nb <cmd> CocCommand document.jumpToPrevSymbol<CR>
+nnoremap <leader>nn <cmd> CocCommand document.jumpToNextSymbol<CR>
 nnoremap <leader>r  <cmd> CocCommand document.renameCurrentWord<CR>
 nnoremap <leader>gd <Plug>(coc-definition)
 

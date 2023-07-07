@@ -3,7 +3,7 @@ export PS1="\[\e[1m\e[31m\]\h::\u \[\e[33m\]\W\$(parse_git_branch)\[\e[m\] λ "
 
 alias grep='grep --color=auto'
 alias ls='ls --group-directories-first --color=auto -p'
-alias q='exit'
+alias py='python3'
 alias v='nvim'
 
 [[ $- != *i* ]] && return
