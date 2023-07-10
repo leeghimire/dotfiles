@@ -49,7 +49,7 @@ autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand(
 autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>
 autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
 
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '\<C-g>u\<TAB>'
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <leader>kj :%y+<CR>
 
 nnoremap <leader>nb <cmd> CocCommand document.jumpToPrevSymbol<CR>
