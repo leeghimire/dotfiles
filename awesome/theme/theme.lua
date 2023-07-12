@@ -1,11 +1,8 @@
 local xresources = require("beautiful.xresources")
-local theme_assets = require("beautiful.theme_assets")
-local gfs = require("gears.filesystem")
 local table = require "table"
 local io = require "io"
 
 local dpi = xresources.apply_dpi
-local themes_path = gfs.get_themes_dir()
 
 local path = os.getenv("HOME") .. "/.cache/wal/colors"
 local file = io.open(path, "r")
@@ -42,7 +39,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(3)
+theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(0)
 theme.border_focus  = theme.border_normal
 
