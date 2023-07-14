@@ -23,8 +23,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
-hi signcolumn ctermbg=black
 colorscheme wal
+hi signcolumn ctermbg=black
+hi CocInlayHint ctermfg=darkgray
 
 set completeopt=menu,menuone,noselect
 set clipboard+=unnamedplus
@@ -40,7 +41,7 @@ function! RunFile(command) abort
 endfunction
 
 autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s -o a.out && time ./a.out', expand('%')))<CR>
-autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++20 %s && time ./a.out', expand('%')))<CR><CR>
+autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++17 %s && time ./a.out', expand('%')))<CR><CR>
 autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s && time ./a.out', expand('%')))<CR>
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
 autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>

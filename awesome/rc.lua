@@ -419,8 +419,14 @@ client.connect_signal("request::titlebars", function(c)
         },
         { -- Middle
             buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
+            layout  = wibox.layout.fixed.horizontal
         },
+	{
+            awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.stickybutton   (c),
+            layout = wibox.layout.fixed.horizontal()
+	},
         layout = wibox.layout.align.horizontal
     }
 end)
