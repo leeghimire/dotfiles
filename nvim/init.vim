@@ -4,6 +4,7 @@ set ignorecase
 set nowrap
 set nu rnu
 set smartcase
+set laststatus=0
 set smartindent
 
 set colorcolumn=80
@@ -41,10 +42,10 @@ function! RunFile(command) abort
 endfunction
 
 autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s -o a.out && time ./a.out', expand('%')))<CR>
-autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++17 %s && time ./a.out', expand('%')))<CR><CR>
+autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++20 %s && time ./a.out', expand('%')))<CR><CR>
 autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s && time ./a.out', expand('%')))<CR>
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
-autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR>
+autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR><CR>
 autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
