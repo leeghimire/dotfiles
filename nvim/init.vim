@@ -4,7 +4,6 @@ set ignorecase
 set nowrap
 set nu rnu
 set smartcase
-set laststatus=0
 set smartindent
 
 set colorcolumn=80
@@ -27,6 +26,7 @@ call plug#end()
 colorscheme wal
 hi signcolumn ctermbg=black
 hi CocInlayHint ctermfg=darkgray
+hi StatusLine cterm=NONE
 
 set completeopt=menu,menuone,noselect
 set clipboard+=unnamedplus
@@ -41,12 +41,19 @@ function! RunFile(command) abort
     autocmd BufEnter <buffer> startinsert
 endfunction
 
-autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s -o a.out && time ./a.out', expand('%')))<CR>
+autocmd Filetype c	nmap <leader>kk :call RunFile(printf('gcc %s -o a.out && time ./a.out', expand('%')))<CR><CR>
 autocmd Filetype cpp	nmap <leader>kk :call RunFile(printf('g++ -std=c++20 %s && time ./a.out', expand('%')))<CR><CR>
 autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s && time ./a.out', expand('%')))<CR>
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
 autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR><CR>
 autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
+autocmd TermOpen * startinsert
+
+nnoremap <leader>c :Vexplore!<CR>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>t :term<CR>
+tnoremap <Esc> <C-\><C-n>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
 nnoremap <leader>kj :%y+<CR>
