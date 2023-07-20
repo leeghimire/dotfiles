@@ -411,24 +411,6 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
-
-    awful.titlebar(c) : setup {
-        { -- Left
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-	{
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.stickybutton   (c),
-            layout = wibox.layout.fixed.horizontal()
-	},
-        layout = wibox.layout.align.horizontal
-    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

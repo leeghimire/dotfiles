@@ -24,8 +24,8 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 colorscheme wal
-hi signcolumn ctermbg=black
 hi CocInlayHint ctermfg=darkgray
+hi signcolumn ctermbg=black
 hi StatusLine cterm=NONE
 
 set completeopt=menu,menuone,noselect
@@ -49,19 +49,16 @@ autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', 
 autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
 autocmd TermOpen * startinsert
 
-nnoremap <leader>c :Vexplore!<CR>
+nnoremap <leader>c :vert sb#<CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>t :term<CR>
 tnoremap <Esc> <C-\><C-n>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
-nnoremap <leader>kj :%y+<CR>
-
-nnoremap <leader>nb <cmd> CocCommand document.jumpToPrevSymbol<CR>
-nnoremap <leader>nn <cmd> CocCommand document.jumpToNextSymbol<CR>
-nnoremap <leader>r  <cmd> CocCommand document.renameCurrentWord<CR>
+nnoremap <leader>rr  <cmd> CocCommand document.renameCurrentWord<CR>
 nnoremap <leader>gd <Plug>(coc-definition)
+nnoremap <leader>kj :%y+<CR>
 
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
