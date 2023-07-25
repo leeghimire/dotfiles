@@ -47,7 +47,6 @@ autocmd Filetype go	nmap <leader>kk :call RunFile(printf('go build -o a.out %s &
 autocmd Filetype lua	nmap <leader>kk :call RunFile(printf('time lua %s', expand('%')))<CR>
 autocmd Filetype python	nmap <leader>kk :call RunFile(printf('time python3 %s', expand('%')))<CR><CR>
 autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out && time ./a.out', expand('%')))<CR>
-autocmd TermOpen * startinsert
 
 nnoremap <leader>c :vert sb#<CR>
 nnoremap <leader>h :wincmd h<CR>
