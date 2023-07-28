@@ -6,8 +6,8 @@ set nu rnu
 set smartcase
 set smartindent
 set colorcolumn=80
-set shiftwidth=4
 set scrolloff=8
+set shiftwidth=4
 set clipboard=unnamedplus
 
 call plug#begin('~/.vim/plugged')
@@ -40,8 +40,11 @@ autocmd Filetype rust	nmap <leader>kk :call RunFile(printf('rustc %s -o a.out &&
 nnoremap <leader>kj :%y+<CR>
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
-nnoremap <leader>rr  <cmd> CocCommand document.renameCurrentWord<CR>
+nnoremap <leader>rn <cmd>CocCommand document.renameCurrentWord<CR>
 nnoremap <leader>gd <Plug>(coc-definition)
+
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
 
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
