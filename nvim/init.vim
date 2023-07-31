@@ -10,6 +10,12 @@ set scrolloff=10
 set shiftwidth=4
 set clipboard=unnamedplus
 
+inoremap " ""<Esc>ha
+inoremap ' ''<Esc>ha
+inoremap ( ()<Esc>ha
+inoremap [ []<Esc>ha
+inoremap { {}<Esc>ha
+
 call plug#begin('~/.vim/plugged')
     Plug 'dylanaraps/wal.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
