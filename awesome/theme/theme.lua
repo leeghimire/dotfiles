@@ -18,12 +18,12 @@ if file then
   end
   file:close()
 else
-  print("Failed to open the file.")
+  print("Failed to open ~/.cache/wal/colors")
 end
 
 local theme = {}
 
-theme.font          = "JetBrainsMono 8"
+theme.font          = "JetBrainsMono 6.5"
 
 theme.bg_normal     = colors[1]
 theme.bg_focus      = colors[2]
