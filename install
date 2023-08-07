@@ -1,6 +1,6 @@
 #!/bin/bash
 cp -r ./awesome ${HOME}/.config/
-cp -r ./init.vim ${HOME}/.config/init.vim
-cp ./bashrc ${HOME}/.bashrc
+cp -r ./init.vim ${HOME}/.config/nvim/init.vim
+cp ./zshrc ${HOME}/.zshrc
 cp ./tmux.conf ${HOME}/.tmux.conf
 cp ./xinitrc ${HOME}/.xinitrc
