@@ -26,15 +26,13 @@ hi clear StatusLine
 let mapleader = ' '
 
 inoremap <silent><expr><TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
+nmap <leader>c <Plug>(coc-codeaction-cursor)
 nmap <leader>rn <cmd>CocCommand document.renameCurrentWord<CR>
 nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
-nmap <silent>gy <Plug>(coc-type-definition)
+nnoremap <leader><silent>a  :<C-u>CocList diagnostics<cr>
 
-nmap [g <Plug>(coc-diagnostic-prev)
-nmap ]g <Plug>(coc-diagnostic-next)
+nnoremap <leader><silent>fb <cmd>Telescope buffers<cr>
+nnoremap <leader><silent>ff <cmd>Telescope find_files<cr>
+nnoremap <leader><silent>fg <cmd>Telescope grep_string<cr>
 
-nnoremap <silent>fb <cmd>Telescope buffers<cr>
-nnoremap <silent>ff <cmd>Telescope find_files<cr>
-nnoremap <silent>fg <cmd>Telescope grep_string<cr>
