@@ -1,0 +1,5 @@
+{
+    "clangd.path": "/bin/clangd",
+    "rust-analyzer.server.path": "/bin/rust-analyzer",
+    "suggest.enablePreview": true,
+}
