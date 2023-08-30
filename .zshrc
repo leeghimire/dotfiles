@@ -2,7 +2,6 @@
 
 bindkey -e
 
-autoload -Uz colors && colors
 autoload -Uz compinit && compinit
 autoload -Uz vcs_info && precmd() { vcs_info }
 
@@ -21,3 +20,5 @@ RPROMPT='%F{yellow}${vcs_info_msg_0_}%f'
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
+
+set -o nomatch
