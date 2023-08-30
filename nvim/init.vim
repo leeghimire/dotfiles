@@ -25,8 +25,10 @@ hi clear StatusLine
 let mapleader = ' '
 
 inoremap <silent><expr><TAB> coc#pum#visible() ? coc#pum#confirm() : '<TAB>'
-
 nmap <leader>ca <Plug>(coc-codeaction-cursor)
 nmap <leader>cd  :<C-u>CocList diagnostics<cr>
 nmap <silent>gd <Plug>(coc-definition)
 nmap <silent>gr <Plug>(coc-references)
+
+nmap <leader>ff :Explore
+nmap <leader>kj :%y+<CR>

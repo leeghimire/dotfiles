@@ -20,5 +20,3 @@ RPROMPT='%F{yellow}${vcs_info_msg_0_}%f'
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-
-set -o nomatch
