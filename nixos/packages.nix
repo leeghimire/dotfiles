@@ -40,11 +40,6 @@
     pipewire
     pulseaudio
     pamixer
-
-    # GPU stuff 
-    amdvlk
-    rocm-opencl-icd
-    glaxnimate
   ];
 
   fonts.packages = with pkgs; [
