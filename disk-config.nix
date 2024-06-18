@@ -2,41 +2,34 @@
   disko.devices = {
     disk = {
       my-disk = {
-        device = "/dev/vda";
         type = "disk";
+        device = "/dev/vdb";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
+              size = "500M";
               type = "EF00";
-              size = "512M";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [
-                  "defaults"
-                ];
               };
             };
             luks = {
               size = "100%";
-		content = {
-                  type = "luks";
-                  name = "crypted";
-                  extraOpenArgs = [ ];
-                  settings = {
-                    # echo -n "password" > /tmp/secret.key
-                    keyFile = "/tmp/secret.key";
-                    allowDiscards = true;
-                  };
-                  content = {
-		    type = "filesystem";
-		    format = "btrfs";
-		    mountpoint = "/";
-                  };
-	        };
-	      };
+              content = {
+                type = "luks";
+                name = "crypted";
+                settings.allowDiscards = true;
+		# echo -n "password" > /tmp/secret.key
+                passwordFile = "/tmp/secret.key";
+                content = {
+                  type = "filesystem";
+                  format = "btrfs";
+                  mountpoint = "/";
+                };
+              };
             };
           };
         };
