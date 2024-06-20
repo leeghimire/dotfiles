@@ -1,17 +1,26 @@
-{ inputs, ...}: {
+{ pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
   ];
 
   disabledModules = [
+    ./modules/devsuite.nix
+    ./modules/nvidia.nix
     ./modules/sound.nix
-    ./modules/zram.nix
-    ./modules/env.nix
-    ./modules/xserver.nix
+    ./modules/suckless.nix #requires xserver.nix
     ./modules/virtmanager.nix
-    ./modules/trim.nix
+    ./modules/xserver.nix
   ];
+
+  services.fstrim.enable = true;
+
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 100;
+    priority = 999;
+  };
 
   users = {
     #defaultUserShell = pkgs.zsh;
@@ -19,9 +28,16 @@
     users.lee = {
       isNormalUser = true;
       description = "Lee NLN";
-      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
       packages = with pkgs; [];
     };
+  };
+
+  environment.variables = {
+    EDITOR = "nvim";
+    RANGER_LOAD_DEFAULT_RC = "FALSE";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    GSETTINGS_BACKEND = "keyfile";
   };
 
   # Enable automatic login for the user.
@@ -29,7 +45,7 @@
 
   networking.networkmanager.enable = true;
 
-  nixpkgs.overlays = [ inputs.polymc.overlay ];
+  nixpkgs.overlays = [];
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -46,8 +62,13 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   boot.initrd.kernelModules = [];
-  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ]; 
+
+  boot.kernelParams = [ "processor.max_cstate=4" "amd_iomu=soft" "idle=nomwait"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  boot.extraModulePackages = [];
 
   system.stateVersion = "23.05"; # Don't change it bro
 }
