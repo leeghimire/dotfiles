@@ -2,9 +2,10 @@
 
 # Installation
 
-⚠️  This process will wipe the disk labeled nvme0n1
+⚠️  This process will wipe /dev/nvme0n1
+⚠️  Remember to change user details
 
-1. Boot into [NixOS](https://nixos.org/download/) installation media
+1. Boot into the [NixOS](https://nixos.org/download/) installation media (do not use the minimal iso)
 
 2. Clone repository
 
