@@ -1,6 +1,7 @@
 { pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ./modules/bundle.nix
     ./packages.nix
   ];
 
@@ -12,6 +13,8 @@
     ./modules/virtmanager.nix
     ./modules/xserver.nix
   ];
+
+  nixpkgs.config.allowUnfree = false;
 
   services.fstrim.enable = true;
 
@@ -55,7 +58,7 @@
 
   boot.initrd.luks.devices = {
     crypted = {
-      device = "/dev/disk/by-uuid/<UUID>"; #change
+      device = "/dev/disk/by-uuid/<UUID>";
       preLVM = true;
     };
   };
@@ -70,5 +73,5 @@
   # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   boot.extraModulePackages = [];
 
-  system.stateVersion = "23.05"; # Don't change it bro
+  system.stateVersion = "23.05";
 }

@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-  nixpkgs.config = {
-    allowUnfree = false;
-  };
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
