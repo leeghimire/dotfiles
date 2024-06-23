@@ -12,7 +12,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
+  boot.loader.grub.device = "/dev/sda1";
   boot.loader.grub.useOSProber = true;
 
   # Do i want this?
@@ -20,11 +20,11 @@
   # boot.loader.efi.canTouchEfiVariables = true;
 
   # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
+  #boot.initrd.secrets = {
+  #  "/crypto_keyfile.bin" = null;
+  #};
 
-  boot.loader.grub.enableCryptodisk=true;
+  #boot.loader.grub.enableCryptodisk=true;
 
   # Im not sure anymore T-T
   # boot.initrd.luks.devices = {
@@ -34,7 +34,7 @@
   #   };
   # };
 
-  boot.initrd.luks.devices."luks-6c74400c-f8e9-4ff5-871b-eb5e2e5aa58d".keyFile = "/crypto_keyfile.bin";
+  #boot.initrd.luks.devices."luks-6c74400c-f8e9-4ff5-871b-eb5e2e5aa58d".keyFile = "/crypto_keyfile.bin";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
