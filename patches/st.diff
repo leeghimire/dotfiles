@@ -6,7 +6,7 @@ diff -Naur st-0.9.2/config.def.h myterm/config.def.h
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-+static char *font = "JetBrainsMonoNL:pixelsize=10:antialias=true:autohint=true";
++static char *font = "JetBrainsMonoNL:pixelsize=12:antialias=true:autohint=true";
  static int borderpx = 2;
  
  /*
