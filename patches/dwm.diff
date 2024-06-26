@@ -1,6 +1,6 @@
 diff -Naur dwm-6.5/config.def.h working/config.def.h
 --- dwm-6.5/config.def.h	2024-03-19 07:24:52.000000000 -0400
-+++ working/config.def.h	2024-06-25 23:52:32.529953995 -0400
++++ working/config.def.h	2024-06-25 23:54:47.789519762 -0400
 @@ -3,10 +3,14 @@
  /* appearance */
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -24,7 +24,7 @@ diff -Naur dwm-6.5/config.def.h working/config.def.h
  	/* class      instance    title       tags mask     isfloating   monitor */
 -	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 -	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-+    { "Chromium",     NULL,       NULL,       0,            1,           -1 },
++        { "Chromium",     NULL,       NULL,       0,            1,           -1 }
  };
  
  /* layout(s) */
