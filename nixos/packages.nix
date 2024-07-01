@@ -1,48 +1,52 @@
 { pkgs, ... }: {
-
   environment.systemPackages = with pkgs; [
-    # Desktop apps
-    chromium
-    mpv
-
-    st
-    dmenu
-
-    # Coding stuff
-    gnumake
-    gcc
-    nodejs
-    python
-
-    # CLI utils
-    wget
-    git
-    unzip
-    ffmpeg
-    zip
-    ntfs3g
+    arandr
+    bitwarden
     brightnessctl
-    swww
-
-    # GUI utils
-    feh
+    cargo
+    clang
     dmenu
-
-    # Xorg stuff
+    eza
+    feh
+    ffmpeg
+    fishPlugins.hydro
+    fishPlugins.z
+    flameshot
+    gcc
+    git
+    gnumake
+    go
+    mpv
+    neovim
+    networkmanagerapplet
+    nodejs
+    ntfs3g
+    python3
+    qutebrowser
+    ripgrep
+    rustc
+    tmux
+    ungoogled-chromium
+    unzip
     xclip
-    #xrandr?
-    xorg.xbacklight
+    xfce.thunar
+    zathura
+    zip
 
-    # Sound
-    pipewire
-    pulseaudio
-    pamixer
+    (st.overrideAttrs (oldAttrs: rec {
+      patches = [
+        (pkgs.fetchpatch {
+          url = "https://raw.githubusercontent.com/leeghimire/dotfiles/main/patches/st.diff";
+          sha256 = "sha256-g4rS8DD6ln7RJD1scVCweWmjTVNyU7gGgiI1e8Xg694=";
+        })
+      ];
+    }))
+
   ];
 
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
 }

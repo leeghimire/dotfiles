@@ -1,0 +1,6 @@
+[Default Applications]
+image/jpeg=feh.desktop;
+image/png=feh.desktop;
+video/mp4=mpv.desktop;
+application/pdf=zathura.desktop;
+text/plain=neovim.desktop;
