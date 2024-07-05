@@ -3,8 +3,6 @@
     arandr
     bitwarden
     brightnessctl
-    cargo
-    clang
     dmenu
     eza
     feh
@@ -12,21 +10,15 @@
     fishPlugins.hydro
     fishPlugins.z
     flameshot
-    gcc
     git
-    gnumake
-    go
     mpv
     neovim
     networkmanagerapplet
-    nodejs
     ntfs3g
-    python3
     qutebrowser
     ripgrep
-    rustc
     tmux
-    ungoogled-chromium
+    chromium
     unzip
     xclip
     xfce.thunar
