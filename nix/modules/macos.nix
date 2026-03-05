@@ -50,6 +50,4 @@
     KeyRepeat = 1;
     "com.apple.sound.beep.feedback" = 0;
   };
-
-  security.pam.services.sudo_local.touchIdAuth = true;
 }

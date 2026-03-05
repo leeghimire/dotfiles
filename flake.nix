@@ -15,7 +15,8 @@
         system = "aarch64-darwin";
         modules = [
           ./nix/modules/shared.nix
-          ./nix/modules/darwin-translated.nix
+          ./nix/modules/packages.nix
+          ./nix/modules/macos.nix
           ./nix/hosts/macbook.nix
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -28,6 +29,7 @@
         system = "x86_64-linux";
         modules = [
           ./nix/modules/shared.nix
+          ./nix/modules/packages.nix
           ./nix/hosts/desktop.nix
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
