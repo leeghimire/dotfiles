@@ -31,6 +31,7 @@
 
   hardware.graphics.enable = true;
   hardware.nvidia = {
+    forceFullCompositionPipeline = true;
     modesetting.enable = true;
     nvidiaPersistenced = true;
     nvidiaSettings = true;
