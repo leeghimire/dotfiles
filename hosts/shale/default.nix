@@ -11,6 +11,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
+  boot.kernelParams = [ "nvidia.NVreg_EnableGpuFirmware=0" ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -31,9 +32,10 @@
   hardware.graphics.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
+    nvidiaPersistenced = true;
     nvidiaSettings = true;
     open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   security.rtkit.enable = true;

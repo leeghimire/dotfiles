@@ -13,6 +13,7 @@ let
     "ripgrep"
     "stow"
     "tmux"
+    "uv"
     "vtsls"
     "zig"
     "zls"
@@ -40,14 +41,7 @@ in {
 
   home.sessionVariables = { TERMINAL = "ghostty"; };
 
-  home.file = {
-    ".config/nvim".source = ./nvim;
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
-    ".xinitrc".text = ''
-      ${pkgs.dex}/bin/dex --autostart --environment i3 &
-      exec i3
-    '';
-  };
+  home.file.".config/nvim".source = ./nvim;
   xsession = lib.mkIf pkgs.stdenv.isLinux {
     windowManager.i3 = {
       enable = true;

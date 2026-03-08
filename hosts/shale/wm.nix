@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
@@ -8,6 +8,4 @@
   services.xserver.windowManager.i3.enable = true;
   services.libinput.enable = true;
   services.libinput.mouse.middleEmulation = false;
-
-  environment.systemPackages = with pkgs; [ xinit ];
 }
