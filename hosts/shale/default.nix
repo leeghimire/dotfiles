@@ -2,10 +2,11 @@
   imports = [
     ../../modules/shared.nix
     ./hardware-configuration.nix
+    ./networking.nix
+    ./ssh.nix
+    ./wm.nix
+    ./power.nix
   ];
-
-  networking.hostName = "shale";
-  networking.enableIPv6 = false;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
@@ -13,29 +14,18 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.networkmanager.enable = true;
-  services.tailscale.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 69 ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
+  fileSystems."/mnt/estrogen" = {
+    device = "/dev/disk/by-uuid/6EA4340CA433D575";
+    fsType = "ntfs3";
+    options = [ "nofail" "x-systemd.automount" "uid=1000" "gid=100" "umask=022" ];
   };
 
-  services.openssh = {
-    enable = true;
-    openFirewall = false;
-    ports = [ 69 ];
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-      PubkeyAuthentication = true;
-    };
+  fileSystems."/mnt/androgen" = {
+    device = "/dev/disk/by-uuid/9692DF2692DF0A1F";
+    fsType = "ntfs3";
+    options = [ "nofail" "x-systemd.automount" "uid=1000" "gid=100" "umask=022" ];
   };
 
-  services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics.enable = true;
