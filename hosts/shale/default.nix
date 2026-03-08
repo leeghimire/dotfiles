@@ -1,7 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
     ../../modules/shared.nix
-    ../../modules/packages.nix
     ./hardware-configuration.nix
   ];
 
@@ -32,12 +31,6 @@
       PermitRootLogin = "no";
       PubkeyAuthentication = true;
     };
-  };
-
-  users.users.lee = {
-    isNormalUser = true;
-    description = "lee";
-    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   services.xserver.enable = true;
@@ -84,11 +77,6 @@
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
       };
     };
-  };
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    TERMINAL = "ghostty";
   };
 
   environment.systemPackages = with pkgs; [

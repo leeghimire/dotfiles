@@ -1,13 +1,10 @@
 { ... }: {
   imports = [
     ../../modules/shared.nix
-    ../../modules/packages.nix
     ../../modules/darwin-settings.nix
   ];
 
   networking.hostName = "m4air";
-
-  system.primaryUser = "lee";
 
   homebrew = {
     enable = true;
