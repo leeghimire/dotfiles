@@ -38,11 +38,25 @@ in {
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/lee" else "/home/lee";
   home.stateVersion = "25.05";
 
-  home.sessionVariables =
-    { TERMINAL = "ghostty"; }
-    // lib.optionalAttrs pkgs.stdenv.isLinux { NIXOS_OZONE_WL = "1"; };
+  home.sessionVariables = { TERMINAL = "ghostty"; };
 
-  home.file.".config/nvim".source = ./nvim;
+  home.file = {
+    ".config/nvim".source = ./nvim;
+  } // lib.optionalAttrs pkgs.stdenv.isLinux {
+    ".xinitrc".text = ''
+      ${pkgs.dex}/bin/dex --autostart --environment i3 &
+      exec i3
+    '';
+  };
+  xsession = lib.mkIf pkgs.stdenv.isLinux {
+    windowManager.i3 = {
+      enable = true;
+      config = {
+        modifier = "Mod4";
+        terminal = "ghostty";
+      };
+    };
+  };
 
   home.packages =
     availablePackages
@@ -52,7 +66,7 @@ in {
         ln -s ${pkgs.neovim}/bin/nvim $out/bin/vim
       '')
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.xclip ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.dex pkgs.xclip ];
 
   programs.git = {
     enable = true;

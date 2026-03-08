@@ -9,5 +9,7 @@
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 25;
   services.upower.enable = false;
 }

@@ -36,12 +36,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-  services.blueman.enable = true;
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

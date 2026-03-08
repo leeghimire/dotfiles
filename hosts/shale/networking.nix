@@ -7,7 +7,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 69 ];
     allowedUDPPorts = [ config.services.tailscale.port ];
+    interfaces.tailscale0.allowedTCPPorts = [ 69 ];
   };
 }
