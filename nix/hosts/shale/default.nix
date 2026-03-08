@@ -40,19 +40,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = false;
-  };
-  services.displayManager.defaultSession = "hyprland";
-
   services.xserver.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics.enable = true;
@@ -85,6 +75,10 @@
     enable = true;
     nativeMessagingHosts.packages = [ pkgs.tridactyl-native ];
     policies.ExtensionSettings = {
+      "tridactyl.vim@cmcaine.co.uk" = {
+        installation_mode = "force_installed";
+        install_url = "https://addons.mozilla.org/firefox/downloads/latest/tridactyl-vim/latest.xpi";
+      };
       "uBlock0@raymondhill.net" = {
         installation_mode = "normal_installed";
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
