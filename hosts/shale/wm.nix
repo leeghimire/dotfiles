@@ -1,5 +1,10 @@
-{ ... }: {
+{ pkgs, ... }: {
   services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.startx.enable = true;
+  services.xserver.displayManager.defaultSession = "none+openbox";
+  services.xserver.windowManager.openbox.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    xorg.xinit
+  ];
 }
