@@ -10,5 +10,6 @@ in {
     (lib.mkIf (has [ "nix" "optimise" "automatic" ] options) {
       nix.optimise.automatic = true;
     })
+
   ];
 }

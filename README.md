@@ -2,5 +2,5 @@
 
 ```sh
 # macOS
-darwin-rebuild switch --flake .#Lees-MacBook-Air
+darwin-rebuild switch --flake .#m4air
 ```

@@ -3,6 +3,6 @@ let
   has = lib.hasAttrByPath;
 in {
   config = lib.mkIf (has [ "networking" "hostName" ] options) {
-    networking.hostName = "Lees-MacBook-Air";
+    networking.hostName = "m4air";
   };
 }

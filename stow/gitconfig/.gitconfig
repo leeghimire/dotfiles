@@ -1,0 +1,7 @@
+[user]
+	name = Lee Ghimire
+	email = hello@leeghimire.com
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
