@@ -55,6 +55,10 @@ in {
         modifier = "Mod4";
         terminal = "ghostty";
       };
+      extraConfig = ''
+        focus_follows_mouse no
+        mouse_warping none
+      '';
     };
   };
 

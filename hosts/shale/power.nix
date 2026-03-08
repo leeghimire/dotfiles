@@ -6,7 +6,7 @@
 
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "powersave";
-  powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = false;
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
   zramSwap.enable = true;
