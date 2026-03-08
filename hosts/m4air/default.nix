@@ -4,7 +4,7 @@
     ../../modules/darwin-settings.nix
   ];
 
-  networking.hostName = "m4air";
+  networking.hostName = "Lees-MacBook-Air";
 
   homebrew = {
     enable = true;
@@ -22,11 +22,12 @@
     casks = [
       "anki"
       "claude-code"
+      "codex"
       "ghostty"
       "little-snitch"
       "netnewswire"
       "proxyman"
-      "tailscale"
+      "tailscale-app"
       "zen"
       "zotero"
     ];

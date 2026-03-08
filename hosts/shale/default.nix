@@ -80,8 +80,10 @@
   };
 
   environment.systemPackages = with pkgs; [
+    codex
     cudatoolkit
     discord
     ghostty
+    nodejs
   ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
 }

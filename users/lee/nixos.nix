@@ -3,6 +3,7 @@
     isNormalUser = true;
     description = "lee";
     extraGroups = [ "networkmanager" "wheel" ];
+    openssh.authorizedKeys.keys = import ./authorized-keys.nix;
   };
 
   home-manager.useGlobalPkgs = true;
