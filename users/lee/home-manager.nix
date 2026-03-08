@@ -54,6 +54,13 @@ in {
       config = {
         modifier = "Mod4";
         terminal = "ghostty";
+        startup = [
+          {
+            command = "${pkgs.dex}/bin/dex --autostart --environment i3";
+            always = true;
+            notification = false;
+          }
+        ];
       };
       extraConfig = ''
         focus_follows_mouse no
