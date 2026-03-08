@@ -8,6 +8,7 @@ let
     "lua"
     "lua-language-server"
     "neovim"
+    "codex"
     "pyright"
     "python3"
     "ripgrep"

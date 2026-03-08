@@ -22,12 +22,12 @@
     casks = [
       "anki"
       "claude-code"
-      "codex"
       "ghostty"
       "little-snitch"
       "netnewswire"
       "proxyman"
       "tailscale"
+      "zen"
       "zotero"
     ];
   };

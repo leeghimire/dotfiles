@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../modules/shared.nix
     ./hardware-configuration.nix
@@ -83,5 +83,5 @@
     cudatoolkit
     discord
     ghostty
-  ];
+  ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
 }
