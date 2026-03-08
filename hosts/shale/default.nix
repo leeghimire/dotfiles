@@ -12,8 +12,11 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
   boot.kernelParams = [ "nvidia.NVreg_EnableGpuFirmware=0" ];
+  boot.blacklistedKernelModules = [ "nouveau" "nvidiafb" "nova_core" ];
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings.allowed-users = [ "lee" ];
+  nix.settings.trusted-users = [ "root" "lee" ];
 
   fileSystems."/mnt/estrogen" = {
     device = "/dev/disk/by-uuid/6EA4340CA433D575";
@@ -32,11 +35,12 @@
   hardware.graphics.enable = true;
   hardware.nvidia = {
     forceFullCompositionPipeline = true;
+    gsp.enable = false;
     modesetting.enable = true;
     nvidiaPersistenced = true;
     nvidiaSettings = true;
     open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   security.rtkit.enable = true;
@@ -49,6 +53,17 @@
 
   programs.steam = {
     enable = true;
+  };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      glibc
+      zlib
+      libffi
+      openssl
+    ];
   };
 
   programs.firefox = {
