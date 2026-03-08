@@ -6,6 +6,9 @@ in {
   networking.hostName = "shale";
   networking.enableIPv6 = false;
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
