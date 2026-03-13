@@ -27,11 +27,19 @@ let
     (pkg: lib.meta.availableOn pkgs.stdenv.hostPlatform pkg)
     requestedPackages;
 
+  linuxCopyCommand = pkgs.writeShellScript "tmux-copy-command" ''
+    if command -v wl-copy >/dev/null 2>&1 && [ -n "''${WAYLAND_DISPLAY-}" ]; then
+      exec wl-copy
+    fi
+
+    exec xclip -in -selection clipboard
+  '';
+
   copyCommand =
     if pkgs.stdenv.isDarwin then
       "pbcopy"
     else
-      "xclip -in -selection clipboard";
+      "${linuxCopyCommand}";
 in {
   programs.home-manager.enable = true;
 
@@ -39,27 +47,28 @@ in {
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/lee" else "/home/lee";
   home.stateVersion = "25.05";
 
-  home.sessionVariables = { TERMINAL = "ghostty"; };
+  home.sessionVariables =
+    { TERMINAL = "ghostty"; }
+    // lib.optionalAttrs pkgs.stdenv.isLinux { NIXOS_OZONE_WL = "1"; };
 
   home.file.".config/nvim".source = ./nvim;
-  xsession = lib.mkIf pkgs.stdenv.isLinux {
-    windowManager.i3 = {
-      enable = true;
-      config = {
-        modifier = "Mod4";
-        terminal = "ghostty";
-        startup = [
-          {
-            command = "${pkgs.dex}/bin/dex --autostart --environment i3";
-            always = true;
-            notification = false;
-          }
-        ];
+  xdg.configFile = lib.mkIf pkgs.stdenv.isLinux {
+    "niri/config.kdl".source = "${pkgs.niri.doc}/share/doc/niri/default-config.kdl";
+  };
+
+  systemd.user.services = lib.mkIf pkgs.stdenv.isLinux {
+    xwayland-satellite = {
+      Unit = {
+        Description = "Xwayland outside your Wayland compositor";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
-      extraConfig = ''
-        focus_follows_mouse no
-        mouse_warping none
-      '';
+      Service = {
+        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+      Install = { WantedBy = [ "graphical-session.target" ]; };
     };
   };
 
@@ -71,7 +80,7 @@ in {
         ln -s ${pkgs.neovim}/bin/nvim $out/bin/vim
       '')
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.dex pkgs.xclip ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.wl-clipboard pkgs.xclip pkgs.xwayland-satellite ];
 
   programs.git = {
     enable = true;

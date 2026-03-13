@@ -1,11 +1,20 @@
-{ ... }: {
-  services.xserver.enable = true;
+{ pkgs, ... }: {
+  services.xserver.enable = false;
   services.xserver.displayManager.startx.enable = false;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "lee";
-  services.displayManager.defaultSession = "none+i3";
-  services.xserver.windowManager.i3.enable = true;
-  services.libinput.enable = true;
-  services.libinput.mouse.middleEmulation = false;
+  services.xserver.displayManager.lightdm.enable = false;
+  services.xserver.windowManager.i3.enable = false;
+
+  services.displayManager.autoLogin.enable = false;
+  services.displayManager.defaultSession = null;
+
+  programs.niri.enable = true;
+
+  services.greetd = {
+    enable = true;
+    useTextGreeter = true;
+    settings.default_session = {
+      user = "greeter";
+      command = "${pkgs.greetd}/bin/agreety --cmd ${pkgs.niri}/bin/niri-session";
+    };
+  };
 }
