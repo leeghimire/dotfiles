@@ -40,6 +40,15 @@ let
       "pbcopy"
     else
       "${linuxCopyCommand}";
+
+  niriConfig = pkgs.runCommand "niri-config.kdl" { } ''
+    cp ${pkgs.niri.doc}/share/doc/niri/default-config.kdl $out
+
+    substituteInPlace $out \
+      --replace-fail 'spawn-at-startup "waybar"' '// spawn-at-startup "waybar"' \
+      --replace-fail 'Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }' 'Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }' \
+      --replace-fail 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }' 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }'
+  '';
 in {
   programs.home-manager.enable = true;
 
@@ -53,7 +62,7 @@ in {
 
   home.file.".config/nvim".source = ./nvim;
   xdg.configFile = lib.mkIf pkgs.stdenv.isLinux {
-    "niri/config.kdl".source = "${pkgs.niri.doc}/share/doc/niri/default-config.kdl";
+    "niri/config.kdl".source = niriConfig;
   };
 
   systemd.user.services = lib.mkIf pkgs.stdenv.isLinux {
@@ -80,7 +89,7 @@ in {
         ln -s ${pkgs.neovim}/bin/nvim $out/bin/vim
       '')
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.wl-clipboard pkgs.xclip pkgs.xwayland-satellite ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.fuzzel pkgs.wl-clipboard pkgs.xclip pkgs.xwayland-satellite ];
 
   programs.git = {
     enable = true;
