@@ -17,12 +17,11 @@
     masApps = {
       "Things 3" = 904280696;
       "Xcode" = 497799835;
-      "uBlock Origin Lite" = 6745342698;
     };
     casks = [
       "anki"
+      "claude"
       "claude-code"
-      "codex"
       "ghostty"
       "little-snitch"
       "netnewswire"
