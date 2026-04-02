@@ -20,11 +20,12 @@
     };
     casks = [
       "anki"
-      "claude"
       "claude-code"
+      "codex"
       "ghostty"
       "little-snitch"
       "netnewswire"
+      "obsidian"
       "proxyman"
       "tailscale-app"
       "zen"
