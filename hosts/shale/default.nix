@@ -81,11 +81,14 @@
     };
   };
 
+  hardware.opentabletdriver.enable = true;
+
   environment.systemPackages = with pkgs; [
     codex
     cudatoolkit
     discord
     ghostty
     nodejs
+    (prismlauncher.override { jdks = [ jdk8 jdk21 ]; })
   ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
 }
