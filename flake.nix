@@ -7,6 +7,11 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
@@ -14,6 +19,7 @@
     nixpkgs,
     nix-darwin,
     home-manager,
+    zen-browser,
     ...
   }:
     let
@@ -28,6 +34,7 @@
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = 6;
+            home-manager.extraSpecialArgs = { inherit zen-browser; };
           }
         ];
       };
@@ -41,6 +48,7 @@
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = "25.05";
+            home-manager.extraSpecialArgs = { inherit zen-browser; };
           }
         ];
       };

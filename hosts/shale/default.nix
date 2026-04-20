@@ -18,13 +18,13 @@
   nix.settings.allowed-users = [ "lee" ];
   nix.settings.trusted-users = [ "root" "lee" ];
 
-  fileSystems."/media/estrogen" = {
+  fileSystems."/mnt/estrogen" = {
     device = "/dev/disk/by-uuid/3c5f4438-ad4f-49b8-9e30-baf49f58af62";
     fsType = "ext4";
     options = [ "nofail" "x-systemd.automount" ];
   };
 
-  fileSystems."/media/androgen" = {
+  fileSystems."/mnt/androgen" = {
     device = "/dev/disk/by-uuid/d9e3466c-3264-405e-a326-9b27990e763f";
     fsType = "ext4";
     options = [ "nofail" "x-systemd.automount" ];
@@ -95,9 +95,7 @@
 
   environment.systemPackages = with pkgs; [
     blender
-    chirp
     codex
-    colmap
     cudatoolkit
     discord
     distrobox

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, zen-browser, ... }:
 let
   requestedPackageNames = [
     "git"
@@ -49,7 +49,8 @@ let
     substituteInPlace $out \
       --replace-fail 'spawn-at-startup "waybar"' '// spawn-at-startup "waybar"' \
       --replace-fail 'Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }' 'Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }' \
-      --replace-fail 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }' 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }'
+      --replace-fail 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }' 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }' \
+      --replace-fail 'gaps 16' 'gaps 0'
 
     cat >> $out <<'EXTRA'
 
@@ -69,6 +70,8 @@ spawn-at-startup "swaybg" "-o" "HDMI-A-2" "-i" "/home/lee/Pictures/tablet.jpg" "
 EXTRA
   '';
 in {
+  imports = [ zen-browser.homeModules.beta ];
+
   programs.home-manager.enable = true;
 
   home.username = "lee";
@@ -125,6 +128,10 @@ in {
       core.editor = "vim";
       init.defaultBranch = "main";
     };
+  };
+
+  programs.zen-browser = {
+    enable = true;
   };
 
   programs.tmux = {
