@@ -2,7 +2,7 @@
   users.users.lee = {
     isNormalUser = true;
     description = "lee";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "dialout" "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = import ./authorized-keys.nix;
   };
 

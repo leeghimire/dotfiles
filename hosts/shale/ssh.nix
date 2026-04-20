@@ -7,9 +7,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
-      PubkeyAuthentication = true;
       AllowUsers = [ "lee" ];
-      X11Forwarding = false;
       AllowAgentForwarding = false;
       AllowTcpForwarding = false;
       MaxAuthTries = 3;

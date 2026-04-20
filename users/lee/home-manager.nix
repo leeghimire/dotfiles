@@ -5,6 +5,7 @@ let
     "go"
     "gopls"
     "jq"
+    "lean4"
     "lua"
     "lua-language-server"
     "neovim"
@@ -49,6 +50,23 @@ let
       --replace-fail 'spawn-at-startup "waybar"' '// spawn-at-startup "waybar"' \
       --replace-fail 'Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }' 'Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }' \
       --replace-fail 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }' 'Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }'
+
+    cat >> $out <<'EXTRA'
+
+output "HDMI-A-3" {
+    mode "1920x1080@60.000"
+    position x=0 y=0
+}
+
+output "HDMI-A-2" {
+    mode "1920x1080@60.042"
+    scale 1.25
+    position x=192 y=1080
+}
+
+spawn-at-startup "swaybg" "-o" "HDMI-A-3" "-i" "/home/lee/Pictures/desktop.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-o" "HDMI-A-2" "-i" "/home/lee/Pictures/tablet.jpg" "-m" "fill"
+EXTRA
   '';
 in {
   programs.home-manager.enable = true;
@@ -91,6 +109,13 @@ in {
       '')
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.fuzzel pkgs.wl-clipboard pkgs.xclip pkgs.xwayland-satellite ];
+
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      open = "xdg-open";
+    };
+  };
 
   programs.git = {
     enable = true;
