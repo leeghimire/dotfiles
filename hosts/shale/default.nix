@@ -18,13 +18,13 @@
   nix.settings.allowed-users = [ "lee" ];
   nix.settings.trusted-users = [ "root" "lee" ];
 
-  fileSystems."/mnt/estrogen" = {
+  fileSystems."/media/estrogen" = {
     device = "/dev/disk/by-uuid/3c5f4438-ad4f-49b8-9e30-baf49f58af62";
     fsType = "ext4";
     options = [ "nofail" "x-systemd.automount" ];
   };
 
-  fileSystems."/mnt/androgen" = {
+  fileSystems."/media/androgen" = {
     device = "/dev/disk/by-uuid/d9e3466c-3264-405e-a326-9b27990e763f";
     fsType = "ext4";
     options = [ "nofail" "x-systemd.automount" ];
@@ -108,6 +108,6 @@
     swaybg
     thunar
     zathura
-    (prismlauncher.override { jdks = [ jdk8 jdk21 ]; })
+    prismlauncher
   ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
 }
