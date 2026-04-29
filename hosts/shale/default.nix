@@ -106,8 +106,10 @@
     overskride
     qgroundcontrol
     swaybg
-    thunar
+    mpv
+    nautilus
     zathura
     prismlauncher
+    (python3.withPackages (ps: [ ps.huggingface-hub ps.hf-xet ]))
   ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
 }
