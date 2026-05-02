@@ -9,14 +9,15 @@
 
   services.resolved = {
     enable = true;
-    fallbackDns = ["9.9.9.9" "1.1.1.1"];
-    dnsovertls = "opportunistic";
+    settings.Resolve = {
+      FallbackDNS = ["9.9.9.9" "1.1.1.1"];
+      DNSOverTLS = "opportunistic";
+    };
   };
 
   services.tailscale.enable = true;
 
   networking.firewall = {
-    enable = true;
     allowedUDPPorts = [ config.services.tailscale.port ];
     interfaces.tailscale0.allowedTCPPorts = [ 69 ];
   };

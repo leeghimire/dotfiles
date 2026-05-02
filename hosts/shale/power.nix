@@ -16,7 +16,6 @@
   powerManagement.cpuFreqGovernor = "performance";
   services.thermald.enable = true;
   zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
 
   swapDevices = [{
     device = "/var/lib/swapfile";

@@ -34,7 +34,6 @@
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = 6;
-            home-manager.extraSpecialArgs = { inherit zen-browser; };
           }
         ];
       };
@@ -49,6 +48,7 @@
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = "25.05";
             home-manager.extraSpecialArgs = { inherit zen-browser; };
+            home-manager.users.lee = { imports = [ ./users/lee/shale.nix ]; };
           }
         ];
       };

@@ -1,18 +1,19 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../../modules/shared.nix
+    ../../modules/nvidia.nix
+    ../../modules/niri-desktop.nix
+    ../../modules/gaming.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./ssh.nix
-    ./wm.nix
     ./power.nix
   ];
 
-  boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
-  boot.kernelParams = [ "nvidia.NVreg_EnableGpuFirmware=0" ];
-  boot.blacklistedKernelModules = [ "nouveau" "nvidiafb" "nova_core" ];
+
+  time.timeZone = "America/Toronto";
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.allowed-users = [ "lee" ];
@@ -30,29 +31,11 @@
     options = [ "nofail" "x-systemd.automount" ];
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opentabletdriver.enable = true;
 
-  hardware.graphics.enable = true;
-  hardware.nvidia = {
-    forceFullCompositionPipeline = true;
-    gsp.enable = false;
-    modesetting.enable = true;
-    nvidiaPersistenced = true;
-    nvidiaSettings = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-  };
-
-  security.rtkit.enable = true;
-  services.pipewire = {
+  virtualisation.podman = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  programs.steam = {
-    enable = true;
+    dockerCompat = true;
   };
 
   programs.nix-ld = {
@@ -66,50 +49,8 @@
     ];
   };
 
-  programs.firefox = {
-    enable = true;
-    nativeMessagingHosts.packages = [ pkgs.tridactyl-native ];
-    policies.ExtensionSettings = {
-      "tridactyl.vim@cmcaine.co.uk" = {
-        installation_mode = "force_installed";
-        install_url = "https://addons.mozilla.org/firefox/downloads/latest/tridactyl-vim/latest.xpi";
-      };
-      "uBlock0@raymondhill.net" = {
-        installation_mode = "normal_installed";
-        install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-      };
-    };
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
-  hardware.opentabletdriver.enable = true;
-
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
-
   environment.systemPackages = with pkgs; [
-    blender
-    codex
     cudatoolkit
-    discord
     distrobox
-    ghostty
-    imv
-    krita
-    nodejs
-    overskride
-    qgroundcontrol
-    swaybg
-    mpv
-    nautilus
-    zathura
-    prismlauncher
-    (python3.withPackages (ps: [ ps.huggingface-hub ps.hf-xet ]))
-  ] ++ lib.optionals (builtins.hasAttr "claude-code" pkgs) [ pkgs.claude-code ];
+  ];
 }
