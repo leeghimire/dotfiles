@@ -1,5 +1,5 @@
 { config, ... }: {
-  networking.hostName = "shale";
+  networking.hostName = "rhyolite";
   networking.enableIPv6 = false;
 
   networking.nameservers = ["1.1.1.1" "9.9.9.9"];

@@ -38,17 +38,17 @@
         ];
       };
 
-      nixosConfigurations."shale" = lib.nixosSystem {
+      nixosConfigurations."rhyolite" = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./hosts/shale
+          ./hosts/rhyolite
           ./users/lee/nixos.nix
           {
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = "25.05";
             home-manager.extraSpecialArgs = { inherit zen-browser; };
-            home-manager.users.lee = { imports = [ ./users/lee/shale.nix ]; };
+            home-manager.users.lee = { imports = [ ./users/lee/rhyolite.nix ]; };
           }
         ];
       };
