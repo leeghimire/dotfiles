@@ -16,11 +16,6 @@ debug {
     render-drm-device "/dev/dri/by-path/pci-0000:08:00.0-render"
 }
 
-output "LG Electronics LG ULTRAWIDE 0x0008DB22" {
-    mode "2560x1080@60.000"
-    position x=1920 y=0
-}
-
 output "ASUSTek COMPUTER INC ASUS VZ279HE L6LMTJ007313" {
     mode "1920x1080@60.000"
     position x=0 y=0
@@ -29,12 +24,18 @@ output "ASUSTek COMPUTER INC ASUS VZ279HE L6LMTJ007313" {
 output "PNP(UGD) CD120FH 20210617" {
     mode "1920x1080@60.042"
     scale 1.25
-    position x=2271 y=1080
+    position x=192 y=1080
 }
 
-spawn-at-startup "swaybg" "-o" "DP-3" "-i" "/home/lee/Pictures/d2.jpg" "-m" "fill"
-spawn-at-startup "swaybg" "-o" "HDMI-A-3" "-i" "/home/lee/Pictures/d2.jpg" "-m" "fill"
-spawn-at-startup "swaybg" "-o" "HDMI-A-1" "-i" "/home/lee/Pictures/d2.jpg" "-m" "fill"
+output "HDMI-A-3" {
+    mode "1920x1080@60.042"
+    scale 1.25
+    position x=192 y=1080
+}
+
+spawn-at-startup "swaybg" "-o" "DP-3" "-i" "/home/lee/Pictures/desktop.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-o" "HDMI-A-3" "-i" "/home/lee/Pictures/tablet.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-o" "HDMI-A-1" "-i" "/home/lee/Pictures/desktop.jpg" "-m" "fill"
 
 window-rule {
     match app-id="mpv"
