@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 let
   requestedPackageNames = [
+    "bubblewrap"
+    "claude-code"
     "go"
     "gopls"
     "jq"
@@ -8,7 +10,7 @@ let
     "lua"
     "lua-language-server"
     "neovim"
-    "opencode"
+    "pi-coding-agent"
     "pyright"
     "ripgrep"
     "uv"
@@ -62,6 +64,17 @@ in {
       open = "xdg-open";
     };
   };
+
+  programs.fish = {
+    enable = true;
+    shellAliases = lib.mkIf pkgs.stdenv.isLinux {
+      open = "xdg-open";
+    };
+  };
+
+  programs.starship.enable = true;
+
+  programs.zoxide.enable = true;
 
   programs.git = {
     enable = true;
