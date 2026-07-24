@@ -4,7 +4,7 @@
   users.users.lee = {
     isNormalUser = true;
     description = "lee";
-    extraGroups = [ "dialout" "networkmanager" "wheel" ];
+    extraGroups = [ "dialout" "docker" "networkmanager" "wheel" ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = import ./authorized-keys.nix;
   };

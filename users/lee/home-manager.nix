@@ -17,6 +17,9 @@ let
     "vtsls"
     "zig"
     "zls"
+    "rustc"
+    "cargo"
+    "rust-analyzer"
   ];
 
   requestedPackages = builtins.concatMap
@@ -88,6 +91,19 @@ in {
 
   programs.tmux = {
     enable = true;
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = resurrect;
+        extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
+      }
+      {
+        plugin = continuum; # must load after resurrect
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '30'
+        '';
+      }
+    ];
     extraConfig = ''
       set -ga terminal-overrides ",screen-256color*:Tc"
       set-option -g default-terminal "screen-256color"

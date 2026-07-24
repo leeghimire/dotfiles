@@ -2,7 +2,7 @@
   imports = [
     ../../modules/shared.nix
     ../../modules/nvidia.nix
-    ../../modules/niri-desktop.nix
+    ../../modules/plasma-desktop.nix
     ../../modules/gaming.nix
     ./display.nix
     ./openrgb.nix
@@ -22,9 +22,25 @@
 
   time.timeZone = "America/Toronto";
 
+  # en_DK = English with ISO 8601 dates, 24-hour clock, metric, A4 paper.
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_TIME = "en_DK.UTF-8";
+    LC_MEASUREMENT = "en_DK.UTF-8";
+    LC_PAPER = "en_DK.UTF-8";
+  };
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.allowed-users = [ "lee" ];
   nix.settings.trusted-users = [ "root" "lee" ];
+
+  virtualisation.docker.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = false;
+    defaultNetwork.settings.dns_enabled = true;
+  };
 
   # Weekly, scheduled (not random) update to the latest unstable + rebuild.
   # Never reboots on its own (allowReboot defaults to false).
@@ -65,8 +81,6 @@
     fsType = "btrfs";
     options = [ "nofail" "x-gvfs-show" "compress=zstd:3" ];
   };
-
-  hardware.opentabletdriver.enable = true;
 
   programs.nix-ld = {
     enable = true;
