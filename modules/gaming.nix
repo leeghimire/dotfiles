@@ -14,8 +14,5 @@
   environment.systemPackages = with pkgs; [
     discord
     prismlauncher
-    gamescope
-    mangohud
-    jemalloc
   ];
 }

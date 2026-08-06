@@ -4,10 +4,9 @@ return {
     config = function()
       vim.lsp.enable("clangd")
       vim.lsp.enable("gopls")
-      vim.lsp.enable("lua-language-server")
       vim.lsp.enable("pyright")
       vim.lsp.enable("vtsls")
-      vim.lsp.enable("rust-analyzer")
+      vim.lsp.enable("rust_analyzer")
       vim.lsp.enable("zls")
 
       vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, {})

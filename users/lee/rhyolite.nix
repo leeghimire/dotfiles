@@ -14,6 +14,7 @@
     blender
     codex
     distrobox
+    foliate
     ghostty
     krita
     mpv

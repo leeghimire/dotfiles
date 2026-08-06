@@ -8,7 +8,6 @@ let
     "jq"
     "lean4"
     "lua"
-    "lua-language-server"
     "neovim"
     "pi-coding-agent"
     "pyright"
