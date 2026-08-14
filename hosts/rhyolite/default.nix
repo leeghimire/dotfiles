@@ -77,9 +77,9 @@
   };
 
   fileSystems."/media/hawaii" = {
-    device = "/dev/disk/by-uuid/88110494-012a-4799-83e7-0ca7cbdbdc7f";
-    fsType = "btrfs";
-    options = [ "nofail" "compress=zstd:3" ];
+    device = "/dev/disk/by-uuid/b570586c-e3ea-41c7-8660-df1aa4375aad";
+    fsType = "xfs";
+    options = [ "nofail" ];
   };
 
   # The Artist 12 (2nd Gen) has no in-kernel driver (hid-uclogic doesn't know
