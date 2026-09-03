@@ -7,11 +7,17 @@
 
   system.stateVersion = "25.05";
 
+  nixpkgs.config.allowUnfree = true;
+
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    allowed-users = [ "lee" ];
+  };
+
   home-manager.users.lee.imports = [ ../../users/lee/rhyolite.nix ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  zramSwap.enable = true;
 
   networking = {
     hostName = "rhyolite";
@@ -38,17 +44,13 @@
   users.users.lee.extraGroups = [ "git" ];
   services.openssh.settings.AllowUsers = [ "git" ];
 
-  # Keep the RTX 2060 GPU function (0000:04:00.0) on vfio-pci at boot so
-  # games only enumerate the RTX 3060. Live compute switching is not yet set up.
-  boot.initrd.kernelModules = [ "vfio_pci" ];
-  boot.kernelParams = [ "vfio-pci.ids=10de:1f08" ];
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
 
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
@@ -64,16 +66,21 @@
     LC_PAPER = "en_DK.UTF-8";
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    allowed-users = [ "lee" ];
-  };
+  # The Artist 12 (2nd Gen) has no in-kernel driver (hid-uclogic doesn't know
+  # 28bd:094a), so KDE's native tablet support can't see it — OTD is required.
+  hardware.opentabletdriver.enable = true;
+
+  programs.nix-ld.enable = true;
+
+  hardware.bluetooth.enable = true;
 
   virtualisation.podman.enable = true;
 
   programs.steam = {
     enable = true;
+    package = pkgs.steam.override {
+      extraEnv.MESA_VK_DEVICE_SELECT = "10de:2504!";
+    };
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
@@ -101,11 +108,6 @@
     options = [ "nofail" ];
   };
 
-  # The Artist 12 (2nd Gen) has no in-kernel driver (hid-uclogic doesn't know
-  # 28bd:094a), so KDE's native tablet support can't see it — OTD is required.
-  hardware.opentabletdriver.enable = true;
 
-  programs.nix-ld.enable = true;
-
-  hardware.bluetooth.enable = true;
+  zramSwap.enable = true;
 }
