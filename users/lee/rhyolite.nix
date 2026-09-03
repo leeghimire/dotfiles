@@ -12,6 +12,7 @@
     xclip
 
     blender
+    claude-code
     codex
     distrobox
     foliate
