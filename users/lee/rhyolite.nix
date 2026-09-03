@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     btop
+    claude-code
     wl-clipboard
     xclip
 

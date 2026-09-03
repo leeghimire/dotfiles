@@ -37,6 +37,13 @@
           home-manager.darwinModules.home-manager
           ./hosts/m4air
           ./users/lee/darwin.nix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.lee.imports = [ ./users/lee/home-manager.nix ];
+            };
+          }
         ];
       };
 
@@ -44,6 +51,8 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
+          ./modules/plasma.nix
+          ./modules/ssh.nix
           ./hosts/rhyolite
           {
             home-manager = {
@@ -67,6 +76,13 @@
           ./modules/ssh.nix
           # ./modules/plasma.nix
           ./users/lee/nixos.nix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.lee.imports = [ ./users/lee/home-manager.nix ];
+            };
+          }
         ];
       };
     };

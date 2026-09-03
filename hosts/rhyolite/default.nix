@@ -1,9 +1,5 @@
 { pkgs, ... }: {
-  imports = [
-    ../../modules/plasma.nix
-    ../../modules/ssh.nix
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   system.stateVersion = "25.05";
 

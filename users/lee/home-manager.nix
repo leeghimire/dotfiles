@@ -11,9 +11,9 @@
   home.file.".config/nvim".source = ./nvim;
 
   home.packages = with pkgs; [
-    claude-code
     cloc
     codex
+    curl
     gh
     jq
     pi-coding-agent
