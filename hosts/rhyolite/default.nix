@@ -1,21 +1,62 @@
 { pkgs, ... }: {
   imports = [
-    ../../modules/nvidia.nix
     ../../modules/plasma.nix
-    ../../modules/gaming.nix
+    ../../modules/ssh.nix
     ./hardware-configuration.nix
-    ./networking.nix
-    ./ssh.nix
-    ./memory.nix
-    ./sleep.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  zramSwap.enable = true;
+
+  networking = {
+    hostName = "rhyolite";
+    enableIPv6 = false;
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
+    networkmanager.enable = true;
+  };
+
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      FallbackDNS = [ "9.9.9.9" "1.1.1.1" ];
+      DNSOverTLS = "opportunistic";
+    };
+  };
+
+  users.users.git = {
+    isSystemUser = true;
+    group = "git";
+    home = "/media/hawaii/origin";
+    createHome = false;
+    shell = "${pkgs.git}/bin/git-shell";
+    openssh.authorizedKeys.keys =
+      (import ../../users/lee/authorized-keys.nix)
+      ++ [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1bb48WAbicvEh2dZTGpMhdgK6c5AnoxQ2YdyQu5RhZQTHF+Dyhdfx/WIoHvGmHy5ellvtkwmbGINLJGrYgUUsAae50d0BpluzmPmdC1U+GACxd/I7AZ2oocHG6vMVGc9D/nuJKRIPjv43Fb/Zvl8N371q2bLkXXDhbnsRCjP4MiR6RDh3COzVIfSqrmEZMzo+xVXDPyDZwgXpW3Ex7rEyrg1G/e9hE2rBLZdOoybiL5vgddzbQhkfhjg8Et0vYjoMInZfsOMhrzDshLdvCAVfYc6m9LjNsY6WqLlf+QrxyWSKqhS4iUngch7H14Bpi/kWl0xaMBcU32bCU8eKRis7kjzuerAKEFhjXjS6hsShbPH670sZh8Otc5UXHPYvMtuDKa90rxfMH8ANnmvrcnm4MSCPStNQwzErTYj1EvDcQybcZ0gkMgXy9Ytj97QeXo3VKc9XL4LhxHqAwzxL4qc032aLVOVJWxY9zOkoAjV3Gh3kUQiXOoS/k+rTHMTs4RfqoD+Nm0E9FMZxq6677vxblHriNb6U+KDWU0n/9p8LNWqYt5AXtKTczjrTaAIVKJYDrzXtCfa9U3bBjpXAkja12rBvCjTSshGxyv+7o73Z7279BEVbwkokYWBw9AWtyR0FIKxhfiVPz++wjC2UCFP7Mi7EKoHLqJYoSskjT+sBUQ== lee@shale"
+      ];
+  };
+  users.groups.git = { };
+  users.users.lee.extraGroups = [ "git" ];
+  services.openssh.settings.AllowUsers = [ "git" ];
+
+  # Keep the RTX 2060 GPU function (0000:04:00.0) on vfio-pci at boot so
+  # games only enumerate the RTX 3060. Live compute switching is not yet set up.
+  boot.initrd.kernelModules = [ "vfio_pci" ];
+  boot.kernelParams = [ "vfio-pci.ids=10de:1f08" ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
 
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   time.timeZone = "America/Toronto";
 
@@ -42,21 +83,15 @@
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # Weekly, scheduled (not random) update to the latest unstable + rebuild.
-  # Never reboots on its own (allowReboot defaults to false).
-  system.autoUpgrade = {
+  programs.steam = {
     enable = true;
-    flake = "/home/lee/Repos/dotfiles";
-    flags = [ "--recreate-lock-file" ];
-    dates = "Sun 04:00";
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
-  # Auto-cull old generations and unreferenced store paths weekly.
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
+  environment.systemPackages = with pkgs; [
+    discord
+    prismlauncher
+  ];
 
   fileSystems."/media/california" = {
     device = "/dev/disk/by-uuid/4679bfa9-0530-4b06-adbe-805d92ca01e7";

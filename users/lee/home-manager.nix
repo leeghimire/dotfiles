@@ -81,10 +81,11 @@ in {
   programs.git = {
     enable = true;
     settings = {
-      user.name = "Lee Ghimire";
-      user.email = "hello@leeghimire.com";
+      color.ui = true;
       core.editor = "vim";
       init.defaultBranch = "main";
+      user.email = "hello@leeghimire.com";
+      user.name = "Lee Ghimire";
     };
   };
 

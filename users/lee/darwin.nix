@@ -34,7 +34,6 @@
       upgrade = true;
     };
     masApps = {
-      "Things 3" = 904280696;
       "Xcode" = 497799835;
     };
     casks = [
@@ -44,11 +43,7 @@
       "ghostty"
       "little-snitch"
       "netnewswire"
-      "obsidian"
-      "proxyman"
-      "tailscale-app"
       "zen"
-      "zotero"
     ];
   };
 

@@ -1,8 +1,5 @@
 { config, ... }: {
-  boot.blacklistedKernelModules = [ "nouveau" "nvidiafb" "nova_core" ];
-
   services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.graphics.enable = true;
 
   # Keep the RTX 2060 (0000:04:00.0) out of the NVIDIA graphics stack.
