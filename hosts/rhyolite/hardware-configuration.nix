@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, modulesPath, ... }:
 
 {
   imports =
@@ -6,9 +6,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "dm_vdo" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [ "dm_vdo" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/0489d877-e7cf-436c-87fc-d7ec28087ece";
@@ -21,8 +19,6 @@
       fsType = "vfat";
       options = [ "umask=0077" ];
     };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

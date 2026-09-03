@@ -10,6 +10,4 @@
     alsa.enable = true;
     pulse.enable = true;
   };
-
-  hardware.bluetooth.enable = true;
 }

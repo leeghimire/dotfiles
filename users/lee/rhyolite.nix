@@ -7,13 +7,11 @@
 
   home.packages = with pkgs; [
     btop
-    cloc
     wl-clipboard
     xclip
 
     blender
-    claude-code
-    codex
+    discord
     distrobox
     foliate
     ghostty
@@ -21,8 +19,6 @@
     mpv
     obsidian
     podman-desktop
-
-    nodejs
-    (python3.withPackages (ps: [ ps.huggingface-hub ps.hf-xet ]))
+    prismlauncher
   ];
 }
