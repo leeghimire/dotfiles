@@ -7,5 +7,3 @@ darwin-rebuild switch --flake .#m4air
 # NixOS
 sudo nixos-rebuild switch --flake .#rhyolite
 ```
-
-Home Manager is integrated into both host rebuilds.

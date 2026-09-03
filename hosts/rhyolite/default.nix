@@ -1,11 +1,8 @@
 { pkgs, ... }: {
   imports = [
-    ../../modules/shared.nix
     ../../modules/nvidia.nix
-    ../../modules/plasma-desktop.nix
+    ../../modules/plasma.nix
     ../../modules/gaming.nix
-    ./display.nix
-    ./openrgb.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./ssh.nix
@@ -31,8 +28,11 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.allowed-users = [ "lee" ];
-  nix.settings.trusted-users = [ "root" "lee" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    allowed-users = [ "lee" ];
+    trusted-users = [ "root" "lee" ];
+  };
 
   virtualisation.docker.enable = true;
 
