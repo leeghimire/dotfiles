@@ -1,5 +1,5 @@
 {
-  description = "rags and thatch";
+  description = "the geothermal larp going strong";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -45,8 +45,28 @@
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/rhyolite
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit zen-browser; };
+              users.lee.imports = [
+                ./users/lee/home-manager.nix
+                ./users/lee/rhyolite.nix
+              ];
+            };
+          }
+        ];
+      };
+
+      nixosConfigurations."silica" = lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/silica
+          ./modules/ssh.nix
+          # ./modules/plasma.nix
           ./users/lee/nixos.nix
-          { home-manager.extraSpecialArgs = { inherit zen-browser; }; }
         ];
       };
     };

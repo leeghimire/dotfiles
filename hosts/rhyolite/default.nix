@@ -14,7 +14,15 @@
     allowed-users = [ "lee" ];
   };
 
-  home-manager.users.lee.imports = [ ../../users/lee/rhyolite.nix ];
+  programs.fish.enable = true;
+
+  users.users.lee = {
+    isNormalUser = true;
+    description = "lee";
+    extraGroups = [ "dialout" "git" "networkmanager" "wheel" ];
+    shell = pkgs.fish;
+    openssh.authorizedKeys.keys = import ../../users/lee/authorized-keys.nix;
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -41,7 +49,6 @@
   };
 
   users.groups.git = { };
-  users.users.lee.extraGroups = [ "git" ];
   services.openssh.settings.AllowUsers = [ "git" ];
 
 
