@@ -3,21 +3,14 @@
 
   programs.zen-browser.enable = true;
 
-  home.sessionVariables.NIXOS_OZONE_WL = "1";
-
   home.packages = with pkgs; [
     btop
     claude-code
-    wl-clipboard
-    xclip
 
     blender
     discord
     distrobox
-    foliate
-    ghostty
     krita
-    mpv
     obsidian
     podman-desktop
     prismlauncher

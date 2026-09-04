@@ -15,9 +15,8 @@
   users.users.lee = {
     isNormalUser = true;
     description = "lee";
-    extraGroups = [ "dialout" "git" "networkmanager" "wheel" ];
+    extraGroups = [ "dialout" "networkmanager" "wheel" ];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = import ../../users/lee/authorized-keys.nix;
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -34,19 +33,6 @@
     enable = true;
     settings.Resolve.DNSOverTLS = "opportunistic";
   };
-
-  users.users.git = {
-    isSystemUser = true;
-    group = "git";
-    home = "/media/hawaii/origin";
-    shell = "${pkgs.git}/bin/git-shell";
-    openssh.authorizedKeys.keys =
-      (import ../../users/lee/authorized-keys.nix);
-  };
-
-  users.groups.git = { };
-  services.openssh.settings.AllowUsers = [ "git" ];
-
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -81,9 +67,6 @@
 
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override {
-      extraEnv.MESA_VK_DEVICE_SELECT = "10de:2504!";
-    };
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 

@@ -1,16 +1,16 @@
 { ... }: {
   services.openssh = {
     enable = true;
-    ports = [ 69 ];
+    ports = [ 42069 ];
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
       AllowUsers = [ "lee" ];
-      AllowAgentForwarding = false;
-      AllowTcpForwarding = false;
-      MaxAuthTries = 3;
-      LoginGraceTime = 20;
     };
   };
+
+  users.users.lee.openssh.authorizedKeys.keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAEAQDPLPSp9zH8hnYHSMjFS78cRtZUTkdJx5AVsfqHowsXgORC6YwnEpbDqvZtCPTFKJegIadizphiwFEn7TJ6KRKhZESYwmv9Iwb39Z+vbPEmOGgJqknhHZ8IBtxsOLoS89dgNy/+jhe6CQ34z+FEt+c0yEYr3T/UkqhbIMohs6cQ1LNOU0HhJyv1dAWztfqoenb3v5vl+rRXbPoV0VMczlh12lMmrKpjgv5/dg57lIu0TnC7bVWrNeBc9ImPGDZU96G/QdvTSINlDDnJ07FzPIrL4/0I5MXjNxKzdU4pjkjTwgjaO3Unhb4Oq2YcjTOyx1/2uFftXawW0nIMz+zn0Sfrw0sCbwbjpj7iF6dvoC6oBapaOWyaQ3DxBVTHd6slkiIbrJjOPKRseEM+GOqhlznEWACZF/9m9pdkp6mIPgULKgi0zA8VKxI1PxV+BKpk3reoZOFi8CH6bDge/Guh5J+Q9iGh2YZ8oXMEe+cB20otxKqfjvUFlKJvk2CeUHEYgdu/Ao1rcZ4tl6JniguRWxteW0zLHEIZ3QlBROW4E6WJC6JSDOrbYUZ40Q3Lt4nFkw63KKsxJ6rBQAm/E/92Bolpz6JGwXZeSG3K0d3pNL1jc2ckaWG8MaaT+IqwvkDp85viWEBopuewM6sfGQ2qOXyCCqkEiLnwmseo7+zKTRMoXhWKNwwVnaofXOxRQNrm5ZQIS838rFAy6R7fFoK12JXX/UVzSi4nP12TFg6T8EX3QFKR9/fxxEgaXL28pHYZCwG6z+1kiNf4cCHlvGocAv++YM0M6BvPUbOZRObStaz8hJEDknwKcGckAeF/syWUb7V+ju5bSluAq9J9izYm6emEHJrHXfRjDZCvDQt169xuZnA/nDIZjHMcck4MKaMI4jx62TqZXbcvWraZAmafzUv6brDn2xa9rLaRNaRViFcHV/Z8+OSFOfHUyfXQT66XRvSxZjPSFvvm1MtoZBR4HiBkRjk8UV6pSBuUkULeE1lt0y9OeWD6IVykHuLeWyiKH0oLx+SunP49Wj5CMFIe1G43/OzJtb6tfxa6jXLCjWnXt15Ht2mMP2tkFUCpEZnq3LHUJ/AXlKbVHC2vlOiVEZfchnpMm3kqMjFmzywGub1QMUSSEoe6rzg0i6Bg8kLhl3b4eEqbhELB/KuxsgKgJbOVhJ/XfeOPu9pfe+DA8SYLVpdYwhLMn8AcLQkhEkEoiX23YBumxxnYkUl1PKcUaKfcsqpxN1pOPmdmK+cvqxBTjC/NNujQortJ0oNA4DMoUwvFgzaUod5BFTDj1SaQHe70BndUdrOtTn9MipJBO15+1DTkOf8bRt8ADQaKt45x1H7SiMJ4wLkdKhPPpX8C+onh hello@leeghimire.com"
+  ];
 }

@@ -6,6 +6,5 @@
     description = "lee";
     extraGroups = [ "dialout" "networkmanager" "wheel" ];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = import ./authorized-keys.nix;
   };
 }
