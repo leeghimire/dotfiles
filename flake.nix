@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,24 +30,25 @@
     nixpkgs,
     nix-darwin,
     home-manager,
+    nix-index-database,
     zen-browser,
     ...
   }:
     let
       lib = nixpkgs.lib;
     in {
-      darwinConfigurations."m4air" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."m4-macbook-air" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           home-manager.darwinModules.home-manager
-          ./users/lee/home-manager.nix
-          ./hosts/m4air
+          ./home/lee/home-manager.nix
+          ./hosts/m4-macbook-air
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit zen-browser; };
-              users.lee.imports = [ ./users/lee/zen.nix ];
+              extraSpecialArgs = { inherit nix-index-database zen-browser; };
+              users.lee.imports = [ ./home/lee/zen.nix ];
             };
           }
         ];
@@ -52,7 +58,7 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./users/lee/home-manager.nix
+          ./home/lee/home-manager.nix
           ./modules/plasma.nix
           ./modules/virtualization.nix
           ./modules/ssh.nix
@@ -61,29 +67,27 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit zen-browser; };
-              users.lee.imports = [
-                ./users/lee/zen.nix
-                ./users/lee/rhyolite.nix
-              ];
+              extraSpecialArgs = { inherit nix-index-database zen-browser; };
+              users.lee.imports = [ ./home/lee/zen.nix ];
             };
           }
         ];
       };
 
-      nixosConfigurations."silica" = lib.nixosSystem {
+      nixosConfigurations."vm-nixos" = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./users/lee/home-manager.nix
+          ./home/lee/home-manager.nix
           # ./modules/plasma.nix
           # ./modules/virtualization.nix
           ./modules/ssh.nix
-          ./hosts/silica
+          ./hosts/vm-nixos
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit nix-index-database; };
             };
           }
         ];

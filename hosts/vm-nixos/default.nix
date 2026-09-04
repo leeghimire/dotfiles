@@ -1,4 +1,4 @@
 { ... }: {
   system.stateVersion = "25.05";
-  networking.hostName = "silica";
+  networking.hostName = "vm-nixos";
 }

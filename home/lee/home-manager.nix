@@ -55,13 +55,6 @@ in
       tree
     ];
 
-    programs.bash = {
-      enable = true;
-      shellAliases = lib.mkIf isLinux {
-        open = "xdg-open";
-      };
-    };
-
     programs.neovim = {
       enable = true;
       vimAlias = true;

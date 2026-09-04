@@ -5,6 +5,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     allowed-users = [ "lee" ];
@@ -12,7 +14,11 @@
 
   users.users.lee = {
     extraGroups = [ "dialout" "networkmanager" ];
-    packages = [ pkgs.discord ];
+    packages = with pkgs; [
+      claude-code
+      discord
+      obsidian
+    ];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
