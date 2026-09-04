@@ -10,7 +10,10 @@
     allowed-users = [ "lee" ];
   };
 
-  users.users.lee.extraGroups = [ "dialout" "networkmanager" ];
+  users.users.lee = {
+    extraGroups = [ "dialout" "networkmanager" ];
+    packages = [ pkgs.discord ];
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -48,8 +51,6 @@
   programs.nix-ld.enable = true;
 
   hardware.bluetooth.enable = true;
-
-  virtualisation.podman.enable = true;
 
   programs.steam = {
     enable = true;

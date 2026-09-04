@@ -29,8 +29,10 @@ lib.mkMerge [
       home.file.".config/nvim".source = ./nvim;
 
       home.packages = with pkgs; [
+        btop
         cloc
         codex
+        comma
         curl
         devenv
         gh

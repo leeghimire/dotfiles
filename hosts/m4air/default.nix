@@ -32,7 +32,8 @@
     enable = true;
     global.autoUpdate = false;
     onActivation = {
-      cleanup = "zap";
+      # cleanup = "zap";
+      cleanup = "uninstall";
       autoUpdate = true;
       upgrade = true;
     };
@@ -46,7 +47,6 @@
       "ghostty"
       "little-snitch"
       "netnewswire"
-      "zen"
     ];
   };
 }

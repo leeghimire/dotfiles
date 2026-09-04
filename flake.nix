@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,6 +41,8 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit zen-browser; };
+              users.lee.imports = [ ./users/lee/zen.nix ];
             };
           }
         ];
@@ -52,6 +54,7 @@
           home-manager.nixosModules.home-manager
           ./users/lee/home-manager.nix
           ./modules/plasma.nix
+          ./modules/virtualization.nix
           ./modules/ssh.nix
           ./hosts/rhyolite
           {
@@ -59,7 +62,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit zen-browser; };
-              users.lee.imports = [ ./users/lee/rhyolite.nix ];
+              users.lee.imports = [
+                ./users/lee/zen.nix
+                ./users/lee/rhyolite.nix
+              ];
             };
           }
         ];
@@ -71,6 +77,7 @@
           home-manager.nixosModules.home-manager
           ./users/lee/home-manager.nix
           # ./modules/plasma.nix
+          # ./modules/virtualization.nix
           ./modules/ssh.nix
           ./hosts/silica
           {
