@@ -47,6 +47,7 @@
       "ghostty"
       "little-snitch"
       "netnewswire"
+      "zen"
     ];
   };
 }

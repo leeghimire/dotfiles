@@ -48,7 +48,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit nix-index-database zen-browser; };
-              users.lee.imports = [ ./home/lee/zen.nix ];
+              users.lee = {
+                imports = [ ./home/lee/zen.nix ];
+                programs.zen-browser.package = null;
+              };
             };
           }
         ];
