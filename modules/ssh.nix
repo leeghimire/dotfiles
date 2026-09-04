@@ -11,5 +11,5 @@
     };
   };
 
-  users.users.lee.openssh.authorizedKeys.keyFiles = [ ../home/lee/lee.pub ];
+  users.users.lee.openssh.authorizedKeys.keyFiles = [ ../users/lee/lee.pub ];
 }

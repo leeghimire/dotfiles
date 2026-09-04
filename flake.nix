@@ -44,7 +44,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.darwinModules.home-manager
-          ./home/lee
+          ./users/lee
           ./hosts/m4-macbook-air
         ];
       };
@@ -54,7 +54,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          ./home/lee
+          ./users/lee
           ./hosts/rhyolite
         ];
       };
@@ -64,7 +64,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          ./home/lee
+          ./users/lee
           ./hosts/vm-nixos
         ];
       };
