@@ -12,8 +12,14 @@ lib.mkMerge [
       shell = pkgs.fish;
     };
 
-    home-manager.users.lee = {
+    home-manager.users.lee = { nix-index-database, pkgs, ... }: {
+      imports = [ nix-index-database.homeModules.default ];
+
       programs.home-manager.enable = true;
+
+      programs.nix-index-database.comma.enable = true;
+      programs.nix-index.package =
+        nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db;
 
       home.stateVersion = "25.05";
 
@@ -32,7 +38,6 @@ lib.mkMerge [
         btop
         cloc
         codex
-        comma
         curl
         devenv
         gh
