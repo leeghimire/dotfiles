@@ -35,13 +35,12 @@
         system = "aarch64-darwin";
         modules = [
           home-manager.darwinModules.home-manager
+          ./users/lee/home-manager.nix
           ./hosts/m4air
-          ./users/lee/darwin.nix
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.lee.imports = [ ./users/lee/home-manager.nix ];
             };
           }
         ];
@@ -51,7 +50,7 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./modules/lee.nix
+          ./users/lee/home-manager.nix
           ./modules/plasma.nix
           ./modules/ssh.nix
           ./hosts/rhyolite
@@ -60,10 +59,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit zen-browser; };
-              users.lee.imports = [
-                ./users/lee/home-manager.nix
-                ./users/lee/rhyolite.nix
-              ];
+              users.lee.imports = [ ./users/lee/rhyolite.nix ];
             };
           }
         ];
@@ -73,7 +69,7 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./modules/lee.nix
+          ./users/lee/home-manager.nix
           # ./modules/plasma.nix
           ./modules/ssh.nix
           ./hosts/silica
@@ -81,7 +77,6 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.lee.imports = [ ./users/lee/home-manager.nix ];
             };
           }
         ];

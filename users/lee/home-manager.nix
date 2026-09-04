@@ -1,59 +1,91 @@
-{ lib, pkgs, ... }: {
-  programs.home-manager.enable = true;
+{ _class, lib, pkgs, ... }:
+let
+  inherit (pkgs.stdenv) isDarwin isLinux;
+in
+lib.mkMerge [
+  {
+    programs.fish.enable = true;
 
-  home.username = "lee";
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/lee" else "/home/lee";
-  home.stateVersion = "25.05";
-
-  home.sessionPath = [ "$HOME/.local/bin" ];
-  home.sessionVariables.TERMINAL = "ghostty";
-
-  home.file.".config/nvim".source = ./nvim;
-
-  home.packages = with pkgs; [
-    cloc
-    codex
-    curl
-    devenv
-    gh
-    jq
-    pi-coding-agent
-    ripgrep
-  ];
-
-  programs.bash = {
-    enable = true;
-    shellAliases = lib.mkIf pkgs.stdenv.isLinux {
-      open = "xdg-open";
+    users.users.lee = {
+      description = "Lee Ghimire";
+      home = if isDarwin then "/Users/lee" else "/home/lee";
+      shell = pkgs.fish;
     };
-  };
 
-  programs.neovim = {
-    enable = true;
-    vimAlias = true;
-  };
+    home-manager.users.lee = {
+      programs.home-manager.enable = true;
 
-  programs.fish = {
-    enable = true;
-    shellAliases = lib.mkIf pkgs.stdenv.isLinux {
-      open = "xdg-open";
+      home.stateVersion = "25.05";
+
+      home.sessionPath = [ "$HOME/.local/bin" ];
+      home.sessionVariables = {
+        LC_TIME = "en_DK.UTF-8";
+        TERMINAL = "ghostty";
+      } // lib.optionalAttrs isLinux {
+        LC_MEASUREMENT = "en_DK.UTF-8";
+        LC_PAPER = "en_DK.UTF-8";
+      };
+
+      home.file.".config/nvim".source = ./nvim;
+
+      home.packages = with pkgs; [
+        cloc
+        codex
+        curl
+        devenv
+        gh
+        jq
+        nixd
+        ripgrep
+        tree
+      ];
+
+      programs.bash = {
+        enable = true;
+        shellAliases = lib.mkIf isLinux {
+          open = "xdg-open";
+        };
+      };
+
+      programs.neovim = {
+        enable = true;
+        vimAlias = true;
+      };
+
+      programs.fish = {
+        enable = true;
+        shellAliases = lib.mkIf isLinux {
+          open = "xdg-open";
+        };
+      };
+
+      programs.starship.enable = true;
+
+      programs.zoxide.enable = true;
+
+      programs.git = {
+        enable = true;
+        settings = {
+          color.ui = true;
+          core.editor = "vim";
+          init.defaultBranch = "main";
+          user.email = "hello@leeghimire.com";
+          user.name = "Lee Ghimire";
+        };
+      };
+
+      programs.tmux.enable = true;
     };
-  };
+  }
 
-  programs.starship.enable = true;
+  (lib.optionalAttrs (_class == "darwin") {
+    system.primaryUser = "lee";
+  })
 
-  programs.zoxide.enable = true;
-
-  programs.git = {
-    enable = true;
-    settings = {
-      color.ui = true;
-      core.editor = "vim";
-      init.defaultBranch = "main";
-      user.email = "hello@leeghimire.com";
-      user.name = "Lee Ghimire";
+  (lib.optionalAttrs (_class == "nixos") {
+    users.users.lee = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
     };
-  };
-
-  programs.tmux.enable = true;
-}
+  })
+]
