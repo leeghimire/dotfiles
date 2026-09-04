@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
   system = lib.optionalAttrs isDarwin {
@@ -58,6 +58,8 @@ in
     programs.neovim = {
       enable = true;
       vimAlias = true;
+      withPython3 = false;
+      withRuby = false;
     };
 
     programs.fish = {
