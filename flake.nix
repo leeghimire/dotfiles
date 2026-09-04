@@ -26,73 +26,46 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    nix-darwin,
-    home-manager,
-    nix-index-database,
-    zen-browser,
-    ...
-  }:
-    let
-      lib = nixpkgs.lib;
-    in {
+  outputs =
+    inputs@{
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      ...
+    }:
+    {
+      formatter = {
+        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+        x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      };
+
       darwinConfigurations."m4-macbook-air" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
         modules = [
           home-manager.darwinModules.home-manager
-          ./home/lee/home-manager.nix
+          ./home/lee
           ./hosts/m4-macbook-air
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit nix-index-database zen-browser; };
-              users.lee = {
-                imports = [ ./home/lee/zen.nix ];
-                programs.zen-browser.package = null;
-              };
-            };
-          }
         ];
       };
 
-      nixosConfigurations."rhyolite" = lib.nixosSystem {
+      nixosConfigurations.rhyolite = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          ./home/lee/home-manager.nix
-          ./modules/plasma.nix
-          ./modules/virtualization.nix
-          ./modules/ssh.nix
+          ./home/lee
           ./hosts/rhyolite
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit nix-index-database zen-browser; };
-              users.lee.imports = [ ./home/lee/zen.nix ];
-            };
-          }
         ];
       };
 
-      nixosConfigurations."vm-nixos" = lib.nixosSystem {
+      nixosConfigurations.vm-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          ./home/lee/home-manager.nix
-          # ./modules/plasma.nix
-          # ./modules/virtualization.nix
-          ./modules/ssh.nix
+          ./home/lee
           ./hosts/vm-nixos
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit nix-index-database; };
-            };
-          }
         ];
       };
     };

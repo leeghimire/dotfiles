@@ -1,20 +1,23 @@
+vim.opt.background = "light"
+vim.opt.colorcolumn = "78"
+vim.opt.laststatus = 3
 vim.opt.number = true
-vim.opt.textwidth = 78
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
-vim.opt.smartcase = true
-vim.opt.ignorecase = true
-vim.opt.swapfile = false
-vim.opt.formatoptions:append("t")
-vim.opt.shiftwidth = 4
+vim.opt.wrap = false
+
 vim.opt.expandtab = true
-vim.opt.laststatus = 3
+vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
-vim.opt.wrap = false
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.clipboard = "unnamedplus"
-vim.o.colorcolumn = "78"
-vim.o.background = "light"
+vim.opt.formatoptions:append("t")
+vim.opt.swapfile = false
+vim.opt.textwidth = 78
 
 vim.cmd([[
   highlight Normal guibg=NONE ctermbg=NONE

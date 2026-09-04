@@ -1,9 +1,17 @@
-{ zen-browser, ... }:
 {
-  imports = [ zen-browser.homeModules.beta ];
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [ inputs.zen-browser.homeModules.beta ];
 
   programs.zen-browser = {
-    enable = true;
+    enable = lib.mkDefault true;
+
+    # macOS installs Zen as a Homebrew cask, so the HM module only manages it.
+    package = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin null;
 
     policies = {
       SearchEngines.Default = "Google";
