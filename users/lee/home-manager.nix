@@ -14,6 +14,7 @@
     cloc
     codex
     curl
+    devenv
     gh
     jq
     pi-coding-agent

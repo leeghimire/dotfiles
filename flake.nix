@@ -51,6 +51,7 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
+          ./modules/lee.nix
           ./modules/plasma.nix
           ./modules/ssh.nix
           ./hosts/rhyolite
@@ -72,10 +73,10 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          ./hosts/silica
-          ./modules/ssh.nix
+          ./modules/lee.nix
           # ./modules/plasma.nix
-          ./users/lee/nixos.nix
+          ./modules/ssh.nix
+          ./hosts/silica
           {
             home-manager = {
               useGlobalPkgs = true;

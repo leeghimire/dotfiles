@@ -10,14 +10,7 @@
     allowed-users = [ "lee" ];
   };
 
-  programs.fish.enable = true;
-
-  users.users.lee = {
-    isNormalUser = true;
-    description = "lee";
-    extraGroups = [ "dialout" "networkmanager" "wheel" ];
-    shell = pkgs.fish;
-  };
+  users.users.lee.extraGroups = [ "dialout" "networkmanager" ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -47,13 +40,6 @@
   systemd.targets.hybrid-sleep.enable = false;
 
   time.timeZone = "America/Toronto";
-
-  # en_DK = English with ISO 8601 dates, 24-hour clock, metric, A4 paper.
-  i18n.extraLocaleSettings = {
-    LC_TIME = "en_DK.UTF-8";
-    LC_MEASUREMENT = "en_DK.UTF-8";
-    LC_PAPER = "en_DK.UTF-8";
-  };
 
   # The Artist 12 (2nd Gen) has no in-kernel driver (hid-uclogic doesn't know
   # 28bd:094a), so KDE's native tablet support can't see it — OTD is required.

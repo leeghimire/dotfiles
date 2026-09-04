@@ -1,5 +1,4 @@
 { ... }: {
   system.stateVersion = "25.05";
   networking.hostName = "silica";
-  nixpkgs.config.allowUnfree = true;
 }
