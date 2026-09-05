@@ -10,6 +10,8 @@ in
 {
   programs.fish.enable = true;
 
+  environment.shells = lib.mkIf isDarwin [ pkgs.fish ];
+
   users.users.lee = {
     description = "Lee Ghimire";
     home = if isDarwin then "/Users/lee" else "/home/lee";

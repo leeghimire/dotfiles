@@ -57,7 +57,7 @@
               type = "explicit-lightness";
             }
           ];
-          opacity = 0.9;
+          opacity = 1.0;
           texture = 0.0;
         };
       };

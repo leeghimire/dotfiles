@@ -47,6 +47,9 @@
       "netnewswire"
       "zen"
     ];
-    masApps.Xcode = 497799835;
+    masApps = {
+      "uBlock Origin Lite" = 6745342698;
+      Xcode = 497799835;
+    };
   };
 }
