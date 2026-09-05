@@ -37,6 +37,7 @@
       "9.9.9.9"
     ];
     networkmanager.enable = true;
+    firewall.allowPing = false;
   };
 
   time.timeZone = "America/Toronto";
