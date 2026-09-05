@@ -41,6 +41,7 @@ in
   };
 
   xdg.configFile."nvim".source = ./nvim;
+  home.file."Desktop/nvim-cheatsheet.md".source = ./nvim-cheatsheet.md;
 
   programs.home-manager.enable = true;
   programs.nix-index-database.comma.enable = true;
@@ -71,6 +72,41 @@ in
     vimAlias = true;
     withPython3 = false;
     withRuby = false;
+    plugins = with pkgs.vimPlugins; [
+      blink-cmp
+      lualine-nvim
+      nvim-lspconfig
+      nvim-web-devicons
+      oil-nvim
+      plenary-nvim
+      telescope-nvim
+      vim-fugitive
+      (nvim-treesitter.withPlugins (p: [
+        p.bash
+        p.c
+        p.cpp
+        p.css
+        p.fish
+        p.go
+        p.gomod
+        p.html
+        p.javascript
+        p.json
+        p.lua
+        p.markdown
+        p.markdown_inline
+        p.nix
+        p.python
+        p.rust
+        p.toml
+        p.tsx
+        p.typescript
+        p.vim
+        p.vimdoc
+        p.yaml
+        p.zig
+      ]))
+    ];
   };
 
   # Use the smaller binaries-only database; the module defaults to the full one.
