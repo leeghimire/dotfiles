@@ -20,17 +20,18 @@ Leader is Space. Everything not listed here is stock Neovim.
 | `]d` `[d` | Next / previous diagnostic |
 | `<C-w>d` | Show diagnostic under cursor |
 
-## Completion (blink.cmp, default preset)
+## Completion (blink.cmp)
 
 | Key | Action |
 |-----|--------|
-| `<C-n>` `<C-p>` | Next / previous item |
-| `<C-y>` | Accept |
+| `<Tab>` `<S-Tab>` | Next / previous item (also `<C-n>` / `<C-p>`) |
+| `<CR>` | Accept selected item (plain newline if nothing selected) |
 | `<C-e>` | Close menu |
 | `<C-space>` | Open menu / toggle docs |
 | `<C-b>` `<C-f>` | Scroll docs |
-| `<Tab>` `<S-Tab>` | Jump between snippet fields |
 | `<C-k>` | Toggle signature help |
+
+Inside a snippet, `<Tab>` / `<S-Tab>` jump between fields once the menu is closed.
 
 ## Telescope
 

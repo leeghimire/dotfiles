@@ -1,9 +1,26 @@
 -- Options -------------------------------------------------------------------
 vim.g.mapleader = " "
 
--- Use the terminal's own 16-colour palette so ghostty's theme (and its
--- light/dark choice) drives everything. 'background' is detected at startup.
+-- Colours come from the terminal: no true colour, and the classic "vim"
+-- colorscheme, which is written in terms of the 16 ANSI colours. Neovim maps a
+-- few of its colour names onto 256-colour entries when the terminal advertises
+-- 256 colours, so those are folded back onto the palette. 'background' is
+-- detected from the terminal at startup and the scheme reloads when it changes.
 vim.o.termguicolors = false
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "vim",
+  callback = function()
+    local ansi = { [121] = 10, [81] = 12, [224] = 9, [225] = 13, [159] = 14, [130] = 3, [242] = 8, [248] = 7 }
+    for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+      local fg, bg = ansi[hl.ctermfg], ansi[hl.ctermbg]
+      if fg or bg then
+        hl.ctermfg, hl.ctermbg = fg or hl.ctermfg, bg or hl.ctermbg
+        vim.api.nvim_set_hl(0, name, hl)
+      end
+    end
+  end,
+})
+vim.cmd.colorscheme("vim")
 
 vim.o.laststatus = 3
 vim.o.number = true
@@ -14,6 +31,12 @@ vim.o.wrap = false
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nix",
+  callback = function()
+    vim.bo.shiftwidth = 2 -- nixfmt convention
+  end,
+})
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -56,19 +79,27 @@ vim.lsp.config("nixd", {
 vim.lsp.enable({ "clangd", "gopls", "nixd", "pyright", "vtsls", "rust_analyzer", "zls" })
 
 -- Treesitter ----------------------------------------------------------------
--- Parsers come from nvim-treesitter.withPlugins in home.nix.
+-- Highlighting only. Parsers come from nvim-treesitter.withPlugins in home.nix.
+-- Indentation stays with Neovim's runtime indent scripts (treesitter's Nix
+-- indent over-indents).
 vim.api.nvim_create_autocmd("FileType", {
   callback = function(ev)
-    if pcall(vim.treesitter.start, ev.buf) then
-      vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end
+    pcall(vim.treesitter.start, ev.buf)
   end,
 })
 
 -- Plugins (installed by home-manager, see home.nix) ------------------------
--- blink.cmp defaults: <C-n>/<C-p> move, <C-y> accept, <C-e> close,
--- <C-space> show/docs, <C-b>/<C-f> scroll docs, <Tab>/<S-Tab> snippet jumps.
-require("blink.cmp").setup({})
+-- blink.cmp: <Tab>/<S-Tab> (or <C-n>/<C-p>) move, <CR> accept, <C-e> close,
+-- <C-space> show/docs, <C-b>/<C-f> scroll docs. Nothing is preselected, so
+-- <CR> on an untouched menu is a plain newline.
+require("blink.cmp").setup({
+  keymap = {
+    preset = "enter",
+    ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+  },
+  completion = { list = { selection = { preselect = false } } },
+})
 
 require("oil").setup({
   columns = { "icon", "permissions", "size", "mtime" },
