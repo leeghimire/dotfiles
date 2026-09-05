@@ -41,7 +41,6 @@ in
   };
 
   xdg.configFile."nvim".source = ./nvim;
-  home.file."Desktop/nvim-cheatsheet.md".source = ./nvim-cheatsheet.md;
 
   programs.home-manager.enable = true;
   programs.nix-index-database.comma.enable = true;
