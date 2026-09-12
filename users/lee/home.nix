@@ -73,6 +73,7 @@ in
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
       blink-cmp
+      lean-nvim
       lualine-nvim
       nvim-lspconfig
       nvim-web-devicons
