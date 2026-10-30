@@ -2,9 +2,9 @@
 {
   imports = [
     ../../modules/common.nix
-    ../../modules/desktop.nix
+    #../../modules/desktop.nix
     ../../modules/ssh.nix
-    ../../modules/virtualization.nix
+    #../../modules/virtualization.nix
     ./hardware-configuration.nix
   ];
 
