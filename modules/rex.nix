@@ -8,8 +8,10 @@
 
     services.rex = {
       enable = true;
-      # Uses the host's tailscaled, not the copy built into Rex.
-      extraListen = [ "tailnet://:7297" ];
+      # Uses the host's tailscaled, not the copy built into Rex. The address is
+      # explicit because a bare port also binds the tailnet IPv6 address, which
+      # fails with networking.enableIPv6 = false.
+      extraListen = [ "tailnet://100.83.188.51:7297" ];
     };
   };
 
