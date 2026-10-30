@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv.hostPlatform) isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
   imports = [
@@ -50,6 +50,11 @@ in
 
   programs.fish = {
     enable = true;
+    interactiveShellInit = lib.mkIf isDarwin ''
+      if set -q REX_BIN_DIR
+        fish_add_path --path --prepend --move $REX_BIN_DIR
+      end
+    '';
     shellAliases = lib.mkIf isLinux {
       open = "xdg-open";
     };
