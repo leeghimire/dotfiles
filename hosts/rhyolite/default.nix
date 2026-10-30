@@ -5,6 +5,7 @@
     #../../modules/desktop.nix
     ../../modules/rex.nix
     ../../modules/ssh.nix
+    ../../modules/tailscale.nix
     #../../modules/virtualization.nix
     ./hardware-configuration.nix
   ];
@@ -53,6 +54,7 @@
       enable = true;
       settings.Resolve.DNSOverTLS = "opportunistic";
     };
+    tailscale.openFirewall = true;
     xserver.videoDrivers = [ "nvidia" ];
   };
 

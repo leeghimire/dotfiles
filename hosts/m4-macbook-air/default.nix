@@ -1,6 +1,9 @@
 { ... }:
 {
-  imports = [ ../../modules/common.nix ];
+  imports = [
+    ../../modules/common.nix
+    ../../modules/tailscale.nix
+  ];
 
   system.stateVersion = 6;
 

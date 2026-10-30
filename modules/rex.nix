@@ -8,7 +8,10 @@
 
     services.rex = {
       enable = true;
-      tailscale.enable = false;
+      # Uses the host's tailscaled, not the copy built into Rex.
+      extraListen = [ "tailnet://:7297" ];
     };
   };
+
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 7297 ];
 }
