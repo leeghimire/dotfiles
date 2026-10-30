@@ -3,6 +3,7 @@
   imports = [
     ../../modules/common.nix
     #../../modules/desktop.nix
+    ../../modules/rex.nix
     ../../modules/ssh.nix
     #../../modules/virtualization.nix
     ./hardware-configuration.nix
