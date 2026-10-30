@@ -19,7 +19,7 @@ in
     (with pkgs; [
       btop
       cloc
-      codex
+      #codex
       curl
       devenv
       gh
