@@ -1,9 +1,6 @@
 { ... }:
 {
-  imports = [
-    ../../modules/common.nix
-    ../../modules/tailscale.nix
-  ];
+  imports = [ ../../modules/common.nix ];
 
   system.stateVersion = 6;
 
@@ -44,10 +41,16 @@
     };
     casks = [
       "anki"
+      "claude-code@latest"
       "codex"
+      "fl-studio"
       "ghostty"
+      "google-chrome"
+      "iina"
       "little-snitch"
       "netnewswire"
+      "proxyman"
+      "tailscale-app"
       "zen"
     ];
     masApps = {

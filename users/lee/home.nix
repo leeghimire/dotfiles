@@ -19,7 +19,6 @@ in
     (with pkgs; [
       btop
       cloc
-      #codex
       curl
       devenv
       gh
@@ -28,7 +27,10 @@ in
       ripgrep
       tree
     ])
-    ++ lib.optionals isLinux [ pkgs.claude-code ];
+    ++ lib.optionals isLinux [
+      pkgs.claude-code
+      pkgs.codex
+    ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];
   home.sessionVariables = {
